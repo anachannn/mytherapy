@@ -10,17 +10,12 @@ const LoopModel = require('./../models/loop.model');
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
-  res.send("Coucou c'est la page patient");
-});
-
-/* HOMEPAGE: ADD A NEW ENTRY/DOCUMENT OR SEE ALL ENTRIES/DOCUMENTS */
-router.get('/homepage', (req, res, next) => {
-  res.render("patient-homepage");
+  res.render("auth/patient.signin");
 });
 
 /* CREATE NEW ENTRY */
-router.get("/add-document", (req, res, next) => {
-  res.render(/* add the right view */);
+router.get("/add-document/text", (req, res, next) => {
+  res.render("createTextDocument");
 });
 
 router.post("/add-document", (req, res, next) => {
@@ -35,7 +30,7 @@ router.post("/add-document", (req, res, next) => {
 
 /* DASHBOARD -> SEE ALL DOCUMENTS */
 router.get("/dashboard", (req, res, next) => {
-  PatientModel.findById(patient.id)
+  PatientModel.findById(patientObject.id)
   .populate("mytherapist mydocuments")
   .then(dbRes => {
     res.render("patientPage", { patientInfo: dbRes });

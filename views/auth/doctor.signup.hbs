@@ -1,6 +1,6 @@
 <h1>Hello Doctor,</h1>
 
-<form method="post" action="/auth/doctor.signup" class="form">
+<form method="post" action="/doctor/signup" class="form">
 
 
     <label for="name">Name</label>
@@ -14,18 +14,17 @@
     
     <label for="password">Your password</label>
     <input class="input" type="password" id="password" name="password" value="12345">
-    
 
     <label for="myspecialty">Your specialty</label>
     <input type="text" id="myspecialty" name="myspecialty" value="CBT" >
 
     <button class="btn">Sign up</button>
 
-     {{#if errorMessage}}
+    {{#if errorMessage}}
     <p class="error">{{errorMessage}}</p>
     {{/if}}
     
 </form>
 <p>
-    Already got an account ? <a href="/auth/doctor.signin">Sign in</a>
+    Already got an account ? <a href="/doctor/signin">Sign in</a>
 </p>

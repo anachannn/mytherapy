@@ -63,9 +63,9 @@ router.post("/patient/signin", async (req, res, next) => {
 
       } else {
      
-        const userObject = foundUser.toObject();
-        delete userObject.password; 
-        req.session.currentUser = userObject;
+        const patientObject = foundUser.toObject();
+        delete patientObject.password; 
+        req.session.currentUser = patientObject;
         req.flash("success", "Successfully logged in...");
         res.redirect("/patient/dashboard");
       }
@@ -128,9 +128,9 @@ router.post("/doctor/signin", async (req, res, next) => {
 
     } else {
      
-        const userObject = foundUser.toObject();
-        delete userObject.password;
-        req.session.currentUser = userObject;
+        const doctorObject = foundUser.toObject();
+        delete doctorObject.password;
+        req.session.currentUser = doctorObject;
   
         req.flash("success", "Successfully logged in...");
         res.redirect("/doctor/dashboard");
