@@ -1,0 +1,27 @@
+<h2>Your profile:</h2>
+<form method="post" action="/doctor/signup" class="form">
+
+    <img src="{{doctors.photo}}" alt="Profile picture">
+
+    <label for="name">Name</label>
+    <input class="input" type="text" id="name" name="name" value="{{doctors.name}}">
+
+    <label for="lastname">Lastname</label>
+    <input class="input" type="text" id="lastname" name="lastname" value="{{doctors.lastname}}">
+    
+    <label for="email">Your Email</label>
+    <input class="input" type="email" id="email" name="email" value="{{doctors.email}}">
+    
+    <label for="password">Your password</label>
+    <input class="input" type="password" id="password" name="password" value="{{doctors.password}}">
+
+    <label for="myspecialty">Your specialty</label>
+    <input type="text" id="myspecialty" name="myspecialty" value="{{doctors.myspecialty}}" >
+
+    <button class="btn">Save changes</button>
+
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    
+</form>

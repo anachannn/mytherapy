@@ -3,3 +3,17 @@
 <h3>{{doctors.name}} {{doctors.lastname}}</h3>
 <p>{{doctors.email}}</p>
 <p>{{doctors.phonenumber}}</p>
+<div>
+    <p>{{doctors.location.adress}}</p>
+    <p>{{doctors.location.zipcode}}</p>
+    <p>{{doctors.location.city}}</p>
+</div>
+<p>Specialties: {{doctors.myspecialty}}</p>
+<h4>My patients:</h4>
+<ul>
+{{#each patients}}
+    <li>{{this.name}} {{this.lastname}}</li>
+{{/each}}
+</ul>
+
+<button><a href="/doctor/edit"></a></button>
