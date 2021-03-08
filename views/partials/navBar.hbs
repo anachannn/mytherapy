@@ -3,13 +3,11 @@
         <img src="/" alt="My therapy logo">
         {{#if doctorLoggedIn}}
             <a href="/signout"></a>
-        {{else}}
-            <p>Welcome!</p>
+       
         {{/if}}
         {{#if patientLoggedIn}}
             <a href="/signout"></a>
-        {{else}}
-            <p>Welcome!</p>
+        
         {{/if}}
     </nav>
 </header>
