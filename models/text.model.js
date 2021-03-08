@@ -2,14 +2,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const textSchema = new Schema({
-    date:{
-        type:Date,
-        default:Date.now()
+    patientId:{
+      type:Schema.Types.ObjectId,
+      ref:'patients'
+    },
+    title:{
+        type:String, 
+        required:true
+    },
+
+    date: {
+        type: Date,
+        default: Date.now()
     },
    
-    text:{
-        type:String,
-        required:true
+    text: {
+        type: String,
+        required: true
     }
 });
 

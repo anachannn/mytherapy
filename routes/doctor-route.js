@@ -10,6 +10,14 @@ router.get('/', (req, res, next) => {
   res.render("auth/doctor.signin");
 });
 
+/* DASHBOARD -> SEE ALL PATIENTS */
+router.get('/dashboard', (req, res, next) => {
+  DoctorModel.findById(doctorObject.id)
+  .populate("mypatients")
+  .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes }))
+  .catch(next);
+});
+
 /* CREATE NEW PATIENT */
 router.get('add-patient', (req, res, next) => {
   res.render("createPatient");
@@ -22,14 +30,6 @@ router.post('add-patient', (req, res, next) => {
     console.log("Patient successfully added!");
     res.redirect('/dashboard');
   })
-  .catch(next);
-})
-
-/* DASHBOARD -> SEE ALL PATIENTS */
-router.get('/dashboard', (req, res, next) => {
-  DoctorModel.findById(doctorObject.id)
-  .populate("mypatients")
-  .then(dbRes => res.render("docPage", { doctorInfo: dbRes }))
   .catch(next);
 });
 
