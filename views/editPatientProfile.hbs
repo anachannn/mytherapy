@@ -1,0 +1,61 @@
+<h2>Edit your profile</h2>
+
+<form action="/edit-profile/{{patient._id}}">
+
+
+<img src="{{patient.photo}}" alt="Profile picture">
+
+    <div>
+        <label for="name"></label>
+        <input type="text" name="name" value="{{patient.name}}">
+    </div>
+
+    <div>
+        <label for="lastname"></label>
+        <input type="text" name="lastname" value="{{patient.lastname}}">
+    </div>
+    
+    <div>
+        <label for="email"></label>
+        <input type="text" name="email" value="{{patient.email}}">
+    </div>
+
+    <div>
+        <label for="phonenumber"></label>
+        <input type="text" name="phonenumber" value="{{patient.phonenumber}}">
+    </div>
+
+    <div>
+        <label for="address"></label>
+        <input type="text" name="address" value="{{patient.address}}">
+    </div>
+
+    <div>
+        <label for="zipcode"></label>
+        <input type="text" name="zipcode" value="{{patient.zipcode}}">
+    </div>
+
+    <div>
+        <label for="city"></label>
+        <input type="text" name="city" value="{{patient.city}}">
+    </div>
+
+    <div>
+        <label for="mytherapist"></label>
+        <input type="text" name="mytherapist" value="{{patient.mytherapist}}">
+    </div>
+
+    <div>
+        <label for="mytherapy"></label>
+        <input type="text" name="mytherapy" value="{{patient.mytherapy}}">
+    </div>
+
+    <div>
+        <label for="mygoals"></label>
+        <input type="text" name="mygoals" value="{{patient.mygoals}}">
+    </div>
+
+
+<button type="submit">Save your changes</button>
+
+</form>

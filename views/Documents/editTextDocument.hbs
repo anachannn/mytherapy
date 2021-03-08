@@ -1,0 +1,15 @@
+<form action="/edit-document/{{text._id}}">
+    <h3>Write down your thoughts :</h3>
+    <div>
+        <label for="date">Date of the event:</label>
+        <input type="date" name="date" value="{{text.date}}">
+    </div>
+
+    <div>
+        <label for="text">Your text</label>
+        <input type="text" placeholder="Write your text here" name="text" value={{text.text}}>
+    </div>
+
+    <button type="submit">Edit this text</button>
+
+    </form>
