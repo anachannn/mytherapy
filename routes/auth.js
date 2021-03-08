@@ -3,6 +3,7 @@ const router = express.Router();
 const PatientModel = require("./../models/patient.model");
 const DoctorModel = require("./../models/doctor.model")
 const bcrypt = require("bcryptjs");
+const mongoose = require('mongoose');
 
 //GET ROUTES
 
@@ -40,7 +41,7 @@ router.get("/doctor/signin", (req, res, next) => {
 
 //POST ROUTES
 
-//Patient
+//Patient - Sign in
 
 router.post("/patient/signin", async (req, res, next) => {
     
@@ -71,10 +72,20 @@ router.post("/patient/signin", async (req, res, next) => {
       }
     }
   });
+
+  // Patient - Sign up
   
   router.post("/patient/signup", async (req, res, next) => {
     try {
       const newUser = { ...req.body }; 
+
+      const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+      if (!regex.test(password)) {
+        res
+          .status(500)
+          .render('auth/patient.signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+        return;
+      }
 
         if(!name || !lastname || !email  || !password){
             res.render('/patient/signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
@@ -95,17 +106,27 @@ router.post("/patient/signin", async (req, res, next) => {
         req.flash("success", "Congrats ! You are now registered !");
         res.redirect("/patient/signin");
       }
-    } catch (err) {
-      let errorMessage = "";
-      for (field in err.errors) {
-        errorMessage += err.errors[field].message + "\n";
-      }
-      req.flash("error", errorMessage);
-      res.redirect("/patient/signup");
-    }
+    } catch (error) {
+        if (error instanceof mongoose.Error.ValidationError) {
+            res.status(500).render('auth/patient.signup', { errorMessage: error.message });
+        } else if (error.code === 11000) {
+            res.status(500).render('auth/patient.signup', {
+               errorMessage: 'Name, Lastname and Email already used.'
+            });
+          } else {
+            next(error);
+          }
+    //   Je ne sais pas quoi faire de ça...
+    //   let errorMessage = "";
+    //   for (field in err.errors) {
+    //     errorMessage += err.errors[field].message + "\n";
+    //   }
+    //   req.flash("error", errorMessage);
+    //   res.redirect("/patient/signup");
+    // }
   });
 
-//Doctor
+//Doctor - Sign in
 
 
 router.post("/doctor/signin", async (req, res, next) => {
@@ -137,10 +158,20 @@ router.post("/doctor/signin", async (req, res, next) => {
       }
     }
   });
+
+  // Doctor - Sign up
   
   router.post("/doctor/signup", async (req, res, next) => {
     try {
       const newUser = { ...req.body };
+
+      const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+      if (!regex.test(password)) {
+        res
+          .status(500)
+          .render('auth/doctor.signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+        return;
+      }
 
       if(!name || !lastname || !email  || !password){
         res.render('/doctor/signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
@@ -162,14 +193,24 @@ router.post("/doctor/signin", async (req, res, next) => {
         req.flash("success", "Congrats ! You are now registered !");
         res.redirect("/doctor/signin");
       }
-    } catch (err) {
-      let errorMessage = "";
-      for (field in err.errors) {
-        errorMessage += err.errors[field].message + "\n";
-      }
-      req.flash("error", errorMessage);
-      res.redirect("/doctor/signup");
-    }
+    } catch (error) {
+        if (error instanceof mongoose.Error.ValidationError) {
+            res.status(500).render('auth/doctor.signup', { errorMessage: error.message });
+        } else if (error.code === 11000) {
+            res.status(500).render('auth/doctor.signup', {
+               errorMessage: 'Name, Lastname and Email already used.'
+            });
+          } else {
+            next(error);
+          }}
+    //   Je ne sais pas quoi faire de ça...
+    //   let errorMessage = "";
+    //   for (field in err.errors) {
+    //     errorMessage += err.errors[field].message + "\n";
+    //   }
+    //   req.flash("error", errorMessage);
+    //   res.redirect("/patient/signup");
+    // }
   });
 
 module.exports = router;
