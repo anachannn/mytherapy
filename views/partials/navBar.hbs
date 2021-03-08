@@ -1,0 +1,15 @@
+<header>
+    <nav>
+        <img src="/" alt="My therapy logo">
+        {{#if docLoggedIn}}
+            <a href="/signout"></a>
+        {{else}}
+            <p>Welcome!</p>
+        {{/if}}
+        {{#if patientLoggedIn}}
+            <a href="/signout"></a>
+        {{else}}
+            <p>Welcome!</p>
+        {{/if}}
+    </nav>
+</header>
