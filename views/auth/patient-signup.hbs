@@ -1,7 +1,8 @@
-<h1>How are you feeling today?</h1>
+<h1 class="title-page">How are you feeling today?</h1>
+
+<div class="form-container">
 
 <form method="post" action="/auth/patient/signup" class="form">
-
 
     <label for="name">Name</label>
     <input class="input" type="text" id="name" name="name" value="test name">
@@ -16,25 +17,32 @@
     <input class="input" type="password" id="password" name="password" value="12345">
     
     <label for="myTherapy">Your therapy</label>
-    <select name="myTherapy" id="myTherapy">
-        <option value="Cognitive-behavioral therapy (CBT)"selected>Cognitive-behavioral therapy (CBT)</option>
-        <option value="Psychoanalytic therapy">Psychoanalytic therapy</option>
-        <option value="Group therapy">Group therapy</option>
+    <select class="select" name="myTherapy" id="myTherapy">
+        <option class="select-option" value="Cognitive-behavioral therapy (CBT)"selected>Cognitive-behavioral therapy (CBT)</option>
+        <option class="select-option" value="Psychoanalytic therapy">Psychoanalytic therapy</option>
+        <option class="select-option" value="Group therapy">Group therapy</option>
     </select>
 
     <label for="myTherapist">Your therapist</label>
-    <input type="text" name="myTherapist" id="myTherapist" value="{{patientInfo.myTherapist}}">
+    <select class="select" name="myTherapist" id="myTherapist">
+      {{#each doctorsList}}
+      <option class="select-option" value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
+      {{/each}}
+    </select>
     
     <label for="myGoals">Your goal</label>
     <input type="text" name="myGoals" id="myGoals">
 
-    <button class="btn">Sign up</button>
+    <button class="btn-patient">Sign up</button>
 
     {{#if errorMessage}}
     <p class="error">{{errorMessage}}</p>
     {{/if}}
     
 </form>
-<p>
+
+
+<p class="sign-up-link">
     Already got an account ? <a href="/auth/patient/signin">Sign in</a>
 </p>
+</div>

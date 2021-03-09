@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('./mod.auth.css');
 
 /* 
 colors
@@ -16,8 +17,43 @@ beige : #F4CD99
 
 body {
   padding: 50px;
+  
 }
 
 a {
   color: #00B7FF;
+}
+
+.first-page-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.background{
+  background-color: #f9f5f5;
+}
+
+.img-first-page{
+  max-width: fit-content;
+}
+
+.btn-first-page{
+
+  font-size: larger;
+  text-decoration: none;
+  text-align: center;
+  margin:40px;
+  padding:15px;
+  padding-left: 9Opx;
+  padding-right: 90px;
+  background-color: #f4cd99c0;
+  color: white;
+  border:none;
+
+}
+
+.btn-first-page:hover{
+  background-color: white;
+  color: black;
+  border: 2px solid #F4CD99;
 }

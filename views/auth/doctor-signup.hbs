@@ -1,4 +1,6 @@
-<h1>Hello Doctor,</h1>
+<h1 class="title-page-doctor">Hello Doctor,</h1>
+
+<div class="form-container">
 
 <form method="post" action="/auth/doctor/signup" class="form">
 
@@ -18,13 +20,15 @@
     <label for="mySpecialty">Your specialty</label>
     <input type="text" id="mySpecialty" name="mySpecialty" value="CBT" >
 
-    <button class="btn">Sign up</button>
+    <button class="btn-doctor">Sign up</button>
 
     {{#if errorMessage}}
     <p class="error">{{errorMessage}}</p>
     {{/if}}
     
 </form>
-<p>
+<p class="sign-up-link">
     Already got an account ? <a href="/auth/doctor/signin">Sign in</a>
 </p>
+
+</div>
