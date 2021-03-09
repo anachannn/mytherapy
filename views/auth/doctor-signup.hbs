@@ -1,0 +1,30 @@
+<h1>Hello Doctor,</h1>
+
+<form method="post" action="/auth/doctor/signup" class="form">
+
+
+    <label for="name">Name</label>
+    <input class="input" type="text" id="name" name="name" value="test name">
+
+    <label for="lastname">Lastname</label>
+    <input class="input" type="text" id="lastname" name="lastname" value="test lastname">
+    
+    <label for="email">Your Email</label>
+    <input class="input" type="email" id="email" name="email" value="test@email.com">
+    
+    <label for="password">Your password</label>
+    <input class="input" type="password" id="password" name="password" value="12345">
+
+    <label for="mySpecialty">Your specialty</label>
+    <input type="text" id="mySpecialty" name="mySpecialty" value="CBT" >
+
+    <button class="btn">Sign up</button>
+
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    
+</form>
+<p>
+    Already got an account ? <a href="/auth/doctor/signin">Sign in</a>
+</p>

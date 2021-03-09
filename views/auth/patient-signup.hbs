@@ -1,0 +1,44 @@
+<h1>How are you feeling today?</h1>
+
+<form method="post" action="/auth/patient/signup" class="form">
+
+
+    <label for="name">Name</label>
+    <input class="input" type="text" id="name" name="name" value="test name">
+
+    <label for="lastname">Lastname</label>
+    <input class="input" type="text" id="lastname" name="lastname" value="test lastname">
+    
+    <label for="email">Your Email</label>
+    <input class="input" type="email" id="email" name="email" value="test@email.com">
+    
+    <label for="password">Your password</label>
+    <input class="input" type="password" id="password" name="password" value="12345">
+    
+    <label for="myTherapy">Your therapy</label>
+    <select name="myTherapy" id="myTherapy">
+        <option value="Cognitive-behavioral therapy (CBT)"selected>Cognitive-behavioral therapy (CBT)</option>
+        <option value="Psychoanalytic therapy">Psychoanalytic therapy</option>
+        <option value="Group therapy">Group therapy</option>
+    </select>
+
+    <label for="myTherapist">Your therapist</label>
+    <select name="myTherapist" id="myTherapist">
+      {{#each doctorsList}}
+      <option value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
+      {{/each}}
+    </select>
+    
+    <label for="myGoals">Your goal</label>
+    <input type="text" name="myGoals" id="myGoals">
+
+    <button class="btn">Sign up</button>
+
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    
+</form>
+<p>
+    Already got an account ? <a href="/auth/patient/signin">Sign in</a>
+</p>

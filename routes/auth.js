@@ -10,11 +10,12 @@ const mongoose = require('mongoose');
 //Patient
 
 router.get("/patient/signin", (req, res, next) => {
-    res.render("auth/patient.signin");
+    res.render("auth/patient-signin");
   });
   
   router.get("/patient/signup", async (req, res, next) => {
-    res.render("auth/patient.signup");
+    const doctorsList = await DoctorModel.find();
+    res.render("auth/patient-signup", { doctorsList });
   });
   
   router.get("/patient/signout", async (req, res, next) => {
@@ -25,15 +26,15 @@ router.get("/patient/signin", (req, res, next) => {
 
 //Doctor
 
-router.get("/doctor/signin", (req, res, next) => {
-    res.render("auth/doctor.signin");
+  router.get("/doctor/signin", (req, res, next) => {
+    res.render("auth/doctor-signin");
   });
   
-  router.get("/doctor/signup", async (req, res, next) => {
-    res.render("auth/doctor.signup");
+  router.get("/doctor/signup", (req, res, next) => {
+    res.render("auth/doctor-signup");
   });
   
-  router.get("/doctor/signout", async (req, res, next) => {
+  router.get("/doctor/signout", (req, res, next) => {
     req.session.destroy(function (err) {
       res.redirect("/doctor/signin");
     });
@@ -46,16 +47,17 @@ router.get("/doctor/signin", (req, res, next) => {
 router.post("/patient/signin", async (req, res, next) => {
     
     const { email, password } = req.body;
-    const foundUser = await User.findOne({ email: email });
+    const foundPatient = await PatientModel.findOne({ email: email });
+    console.log("foundPatient TRY 1: ", foundPatient);
   
-    if (!foundUser) {
+    if (!foundPatient) {
 
       req.flash("error", "Invalid credentials");
       res.redirect("/patient/signin");
 
     } else {
 
-      const isSamePassword = bcrypt.compareSync(password, foundUser.password);
+      const isSamePassword = bcrypt.compareSync(password, foundPatient.password);
       
       if (!isSamePassword) {
         
@@ -64,9 +66,12 @@ router.post("/patient/signin", async (req, res, next) => {
 
       } else {
      
-        const patientObject = foundUser.toObject();
+        const patientObject = foundPatient.toObject();
+        console.log("PATIENTOBJECT: ", patientObject);
         delete patientObject.password; 
+        console.log(req.session, "before defining current user");
         req.session.currentUser = patientObject;
+        console.log(req.session.currentUser);
         req.flash("success", "Successfully logged in...");
         res.redirect("/patient/dashboard");
       }
@@ -77,45 +82,49 @@ router.post("/patient/signin", async (req, res, next) => {
   
   router.post("/patient/signup", async (req, res, next) => {
     try {
-      const newUser = { ...req.body }; 
+      const newPatient = { ...req.body }; 
+      console.log("newPatient TRY 1: ", newPatient)
 
-      const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-      if (!regex.test(password)) {
-        res
-          .status(500)
-          .render('auth/patient.signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
-        return;
-      }
+      // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+      // if (!regex.test(password)) {
+      //   res
+      //     .status(500)
+      //     .render('auth/patient-signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+      //   return;
+      // }
 
-        if(!name || !lastname || !email  || !password){
-            res.render('/patient/signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
+        if(!newPatient.name || !newPatient.lastname || !newPatient.email  || !newPatient.password){
+            res.render('auth/patient-signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
             return;
         };
 
-      const foundUser = await User.findOne({ email: newUser.email });
+      const foundPatient = await PatientModel.findOne({ email: newPatient.email });
   
-      if (foundUser) {
+      if (foundPatient) {
+        console.log("foundPatient: ", foundPatient);
         req.flash("warning", "Email already registered");
         res.redirect("/patient/signup");
 
       } else {
 
-        const hashedPassword = bcrypt.hashSync(newUser.password, 10);
-        newUser.password = hashedPassword;
-        await PatientModel.create(newUser);
+        const hashedPassword = bcrypt.hashSync(newPatient.password, 10);
+        newPatient.password = hashedPassword;
+        await PatientModel.create(newPatient);
+        console.log("newPatient TRY 2: ", newPatient);
         req.flash("success", "Congrats ! You are now registered !");
-        res.redirect("/patient/signin");
+        res.redirect("/auth/patient/signin");
       }
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {
-            res.status(500).render('auth/patient.signup', { errorMessage: error.message });
+            res.status(500).render('auth/patient-signup', { errorMessage: error.message });
         } else if (error.code === 11000) {
-            res.status(500).render('auth/patient.signup', {
+            res.status(500).render('auth/patient-signup', {
                errorMessage: 'Name, Lastname and Email already used.'
             });
           } else {
             next(error);
           }
+      }
     //   Je ne sais pas quoi faire de ça...
     //   let errorMessage = "";
     //   for (field in err.errors) {
@@ -132,16 +141,16 @@ router.post("/patient/signin", async (req, res, next) => {
 router.post("/doctor/signin", async (req, res, next) => {
    
     const { email, password } = req.body;
-    const foundUser = await User.findOne({ email: email });
+    const foundDoctor = await DoctorModel.findOne({ email: email });
   
-    if (!foundUser) {
+    if (!foundDoctor) {
      
       req.flash("error", "Invalid credentials");
       res.redirect("/doctor/signin");
 
     } else {
 
-      const isSamePassword = bcrypt.compareSync(password, foundUser.password);
+      const isSamePassword = bcrypt.compareSync(password, foundDoctor.password);
       if (!isSamePassword) {
        
         req.flash("error", "Invalid credentials");
@@ -149,7 +158,7 @@ router.post("/doctor/signin", async (req, res, next) => {
 
     } else {
      
-        const doctorObject = foundUser.toObject();
+        const doctorObject = foundDoctor.toObject();
         delete doctorObject.password;
         req.session.currentUser = doctorObject;
   
@@ -163,41 +172,42 @@ router.post("/doctor/signin", async (req, res, next) => {
   
   router.post("/doctor/signup", async (req, res, next) => {
     try {
-      const newUser = { ...req.body };
+      const newDoctor = { ...req.body };
+      console.log("NEW USER:", newDoctor);
+      // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+      // if (!regex.test(password)) {
+      //   res
+      //     .status(500)
+      //     .render('auth/doctor-signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
+      //   return;
+      // }
 
-      const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-      if (!regex.test(password)) {
-        res
-          .status(500)
-          .render('auth/doctor.signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
-        return;
-      }
-
-      if(!name || !lastname || !email  || !password){
-        res.render('/doctor/signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
+      if(!newDoctor.name || !newDoctor.lastname || !newDoctor.email  || !newDoctor.password){
+        res.render('auth/doctor-signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
         return;
     };
 
-      const foundUser = await User.findOne({ email: newUser.email });
+      const foundDoctor = await DoctorModel.findOne({ email: newDoctor.email });
   
-      if (foundUser) {
+      if (foundDoctor) {
 
         req.flash("warning", "Email already registered");
         res.redirect("/doctor/signup");
         
       } else {
 
-        const hashedPassword = bcrypt.hashSync(newUser.password, 10);
-        newUser.password = hashedPassword;
-        await DoctorModel.create(newUser);
+        const hashedPassword = bcrypt.hashSync(newDoctor.password, 10);
+        newDoctor.password = hashedPassword;
+        await DoctorModel.create(newDoctor);
+        console.log("NEW DOCTOR TRY 2: ", newDoctor);
         req.flash("success", "Congrats ! You are now registered !");
-        res.redirect("/doctor/signin");
+        res.redirect("/auth/doctor/signin");
       }
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {
-            res.status(500).render('auth/doctor.signup', { errorMessage: error.message });
+            res.status(500).render('auth/doctor-signup', { errorMessage: error.message });
         } else if (error.code === 11000) {
-            res.status(500).render('auth/doctor.signup', {
+            res.status(500).render('auth/doctor-signup', {
                errorMessage: 'Name, Lastname and Email already used.'
             });
           } else {

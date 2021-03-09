@@ -1,6 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
+/* 
+colors
+bleu : #B1D4F1
+beige : #F4CD99
+*/
+
+* {
+  box-sizing: border-box;
+  font-family: Alata;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {

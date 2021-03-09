@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
 /* DASHBOARD -> SEE ALL PATIENTS */
 router.get('/dashboard', (req, res, next) => {
-  DoctorModel.findById(doctorObject.id)
+  DoctorModel.findById(req.session.currentUser._id)
   .populate("mypatients")
   .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes }))
   .catch(next);

@@ -7,17 +7,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
-const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo").default;
 const logger = require('morgan');
+const flash = require('connect-flash');
 
-app.use(logger("dev"));
-
-const indexRouter = require('./routes/index');
-const patientsRouter = require('./routes/patient-route');
-const doctorsRouter = require('./routes/doctor-route');
+// app.use(logger("dev"));
 
 const app = express();
 
@@ -29,31 +25,37 @@ hbs.registerPartials(path.join(__dirname, "views/partials"));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(flash());
-app.use(require("./middlewares/exposeFlashMessage"));
-app.use(require("./middlewares/exposeDoctorLoginStatus"));
-app.use(require("./middlewares/exposePatientLoginStatus"));
 
 //session set up
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     cookie: { maxAge: 60000 }, // in millisec
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60, // 1 day
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI
     }),
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
   })
 );
+
+app.use(flash());
+
+app.use(require("./middlewares/exposeFlashMessage"));
+app.use(require("./middlewares/exposeDoctorLoginStatus"));
+app.use(require("./middlewares/exposePatientLoginStatus"));
+
+const indexRouter = require('./routes/index');
+const patientsRouter = require('./routes/patient-route');
+const doctorsRouter = require('./routes/doctor-route');
+const authRouter = require('./routes/auth');
 
 app.use('/', indexRouter);
 app.use('/patient', patientsRouter);
 app.use('/doctor', doctorsRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
