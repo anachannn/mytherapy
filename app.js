@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("./configs/dbconfig"); 
-//require("./helpers/hbs");
+require("./helpers/hbs");
 
 const createError = require('http-errors');
 const express = require('express');

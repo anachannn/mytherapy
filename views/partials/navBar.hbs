@@ -1,8 +1,8 @@
 <header>
     <nav id="nav-bar">
-        {{#unless doctorLoggedIn || patientLoggedIn}}
-        <a href="/about" id="about">About</a>
-        {{/unless}}
+        {{#ifCond doctorLoggedIn "||" patientLoggedIn}}
+            <a href="/about" id="about">About</a>
+        {{/ifCond}}
         {{#if doctorLoggedIn}}
             <img src="https://www.notion.so/Links-to-images-87d43aac3f91466d855a3e18fc098996#5ff389ca3d5041679fc8ef58f1164781" alt="Blue cloud" class="nav-cloud">
             <h1 class="nav-title">My therapy</h1>
