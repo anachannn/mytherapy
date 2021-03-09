@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 /* DASHBOARD -> SEE ALL DOCUMENTS */
 router.get("/dashboard", (req, res, next) => {
   PatientModel.findById(req.session.currentUser._id)
-  .populate("mytherapist mytexts myloops")
+  .populate("myTherapist myTexts myLoops")
   .then(dbRes => {
     res.render("dashboardPatient", { patientInfo: dbRes });
   })
@@ -148,7 +148,21 @@ router.get('/document-delete/:type', (req, res, next) => {
         console.log("Document successfully deleted");
         res.redirect("/dashboard");
       })
+      .catch(next);
   }
-})
+});
+
+router.get('/edit-profile/:id', (req, res, next) => {
+  PatientModel.findById(req.params.id)
+  .then(dbRes => res.render("editPatientProfile", { patientInfo: dbRes }))
+  .catch(next);
+});
+
+router.post('/edit-profile/:id', (req, res, next) => {
+  // const { name, lastname, email, phoneNumber, locationAddress, locationZipcode, locationCity, myTherapist, myTherapy, myGoals } = req.body;
+  PatientModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(dbRes => console.log(dbRes))
+  .catch(next);
+});
 
 module.exports = router;

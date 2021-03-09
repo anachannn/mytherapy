@@ -1,29 +1,31 @@
 <section id="left-bar">
     <div id="therapist">
         <h5>My Therapist</h5>
-        <img src="/" alt="therapist picture">
-        <p>NAME</p>
+        <img src="{{patientInfo.myTherapist.photo}}" alt="{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}} picture">
+        <p>{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}}</p>
     </div>
     <div id="my-documents">
         <h5>My Documents</h5>
         <ul>
-            <li>list of docs</li>
+          {{#each patientInfo.myTexts}}
+            <li>{{this.title}}</li>
+          {{/each}}
         </ul>
     </div>
 </section>
 <section id="head-infos">
     <div id="therapy">
         <h5>My Therapy</h5>
-        <p>NAME</p>
+        <p>{{patientInfo.myTherapy}}</p>
     </div>
     <div id="account">
-        <img src="/" alt="profil picture">
-        <h5>NAME</h5>
-        <button>Edit Profil</button>
+        <img src="{{patientInfo.photo}}" alt="{{patientInfo.name}} {{patientInfo.lastname}} picture">
+        <h5>{{patientInfo.name}} {{patientInfo.lastname}}</h5>
+        <button><a href="/patient/edit-profile/{{patientInfo._id}}">Edit Profile</a></button>
     </div>
     <div id="goal">
         <h5>GOALS:</h5>
-        <p>NAME</p>
+        <p>{{patientInfo.myGoals}}</p>
     </div>
 </section>
 <section id="main">
