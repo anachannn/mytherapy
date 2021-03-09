@@ -159,9 +159,13 @@ router.get('/edit-profile/:id', (req, res, next) => {
 });
 
 router.post('/edit-profile/:id', (req, res, next) => {
-  // const { name, lastname, email, phoneNumber, locationAddress, locationZipcode, locationCity, myTherapist, myTherapy, myGoals } = req.body;
+  // const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
+  console.log(req.body);
   PatientModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
-  .then(dbRes => console.log(dbRes))
+  .then(dbRes => {
+    console.log("Profile successfully edited! ", dbRes);
+    res.redirect("/dashboard");
+  })
   .catch(next);
 });
 

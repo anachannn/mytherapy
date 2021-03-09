@@ -25,9 +25,18 @@ const patientSchema = new Schema({
     },
     phoneNumber: String,
     location: {
-        address: String,
-        zipcode: String,
-        city: String
+        address: {
+          type: String,
+          default: ""
+        },
+        zipcode: {
+          type: String,
+          default: ""
+        },
+        city: {
+          type: String,
+          default: ""
+        }
     },
     photo:{
         type: String,

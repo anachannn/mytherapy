@@ -171,7 +171,7 @@ router.post("/doctor/signin", async (req, res, next) => {
   router.post("/doctor/signup", async (req, res, next) => {
     try {
       const newDoctor = { ...req.body };
-      console.log("NEW USER:", newDoctor);
+      console.log("NEW DOCTOR:", newDoctor);
       // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
       // if (!regex.test(password)) {
       //   res

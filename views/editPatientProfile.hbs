@@ -1,6 +1,6 @@
 <h2>Edit your profile</h2>
 
-<form action="/patient/edit-profile/{{patientInfo._id}}">
+<form action="/patient/edit-profile/{{patientInfo._id}}" method="post">
 
 
 <img src="{{patientInfo.photo}}" alt="Profile picture">
@@ -37,7 +37,7 @@
 
     <div>
         <label for="city">City:</label>
-        <input type="text" name="city" value="{{patientInfo.location}}">
+        <input type="text" name="city" value="{{patientInfo.location.city}}">
     </div>
 
     <div>
