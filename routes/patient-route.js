@@ -15,9 +15,42 @@ router.get('/', (req, res, next) => {
 /* DASHBOARD -> SEE ALL DOCUMENTS */
 router.get("/dashboard", (req, res, next) => {
   PatientModel.findById(req.session.currentUser._id)
-  .populate("myTherapist myTexts myLoops")
+    .populate("myTherapist myTexts myLoops")
+    .then(dbRes => res.render("dashboardPatient", { patientInfo: dbRes }))
+    .catch(next);
+});
+
+/* EDIT PROFILE */
+router.get('/edit-profile/:id', async (req, res, next) => {
+  try {
+    const doctorsList = await DoctorModel.find();
+    console.log(doctorsList);
+    const patientInfo = await PatientModel.findById(req.params.id);
+    res.render("editPatientProfile", { patientInfo, doctorsList });
+  } catch(err) {
+    next(err);
+  }
+});
+
+router.post('/edit-profile/:id', (req, res, next) => {
+  const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
+  PatientModel.findByIdAndUpdate(req.params.id, {
+    name,
+    lastname,
+    email,
+    phoneNumber,
+    location: {
+      address: req.body.address,
+      zipcode: req.body.zipcode,
+      city: req.body.city
+    },
+    myTherapist,
+    myTherapy,
+    myGoals
+    }, {new: true})
   .then(dbRes => {
-    res.render("dashboardPatient", { patientInfo: dbRes });
+    console.log("Profile successfully edited! ", dbRes);
+    res.redirect("/patient/dashboard");
   })
   .catch(next);
 });
@@ -35,7 +68,7 @@ router.post("/add-document/:type", (req, res, next) => {
     TextModel.create({ patientId, date, text })
     .then(dbRes => {
       console.log("New document created!");
-      res.redirect("/dashboard");
+      res.redirect("/patient/dashboard");
     })
     .catch(next);
   } else if (type === "loop") {
@@ -71,7 +104,7 @@ router.post("/add-document/:type", (req, res, next) => {
       })
       .then(dbRes => {
         console.log("Document successfully created");
-        res.redirect("/dashboard");
+        res.redirect("/patient/dashboard");
       })
       .catch(next);
   }
@@ -90,7 +123,7 @@ router.post("/edit-document/:type", (req, res, next) => {
     TextModel.findByIdAndCreate(req.params.id, { date, text })
     .then(dbRes => {
       console.log("Document updated!");
-      res.redirect("/dashboard");
+      res.redirect("/patient/dashboard");
     })
     .catch(next);
   } else if (type === "loop") {
@@ -125,7 +158,7 @@ router.post("/edit-document/:type", (req, res, next) => {
       })
       .then(dbRes => {
         console.log("Document successfully updated");
-        res.redirect("/dashboard");
+        res.redirect("/patient/dashboard");
       })
       .catch(next);
   }
@@ -139,34 +172,17 @@ router.get('/document-delete/:type', (req, res, next) => {
     TextModel.findByIdAndDelete(req.params.id)
     .then(dbRes => {
       console.log("Document successfully deleted");
-      res.redirect("/dashboard");
+      res.redirect("/patient/dashboard");
     })
     .catch(next);
   } else if (type === "loop") {
       LoopModel.findByIdAndDelete(req.params.id)
       .then(dbRes => {
         console.log("Document successfully deleted");
-        res.redirect("/dashboard");
+        res.redirect("/patient/dashboard");
       })
       .catch(next);
   }
-});
-
-router.get('/edit-profile/:id', (req, res, next) => {
-  PatientModel.findById(req.params.id)
-  .then(dbRes => res.render("editPatientProfile", { patientInfo: dbRes }))
-  .catch(next);
-});
-
-router.post('/edit-profile/:id', (req, res, next) => {
-  // const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
-  console.log(req.body);
-  PatientModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
-  .then(dbRes => {
-    console.log("Profile successfully edited! ", dbRes);
-    res.redirect("/dashboard");
-  })
-  .catch(next);
 });
 
 module.exports = router;
