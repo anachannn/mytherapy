@@ -42,11 +42,7 @@
 
     <div>
         <label for="myTherapist">My Therapist:</label>
-        <select name="myTherapist" id="myTherapist">
-          {{#each doctorsList}}
-            <option value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
-          {{/each}} 
-        </select>
+        <input type="text" name="myTherapist" id="myTherapist" value="{{patientInfo.myTherapist}}">
     </div>
 
     <div>

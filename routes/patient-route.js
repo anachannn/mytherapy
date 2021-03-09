@@ -21,16 +21,22 @@ router.get("/dashboard", (req, res, next) => {
 });
 
 /* EDIT PROFILE */
-router.get('/edit-profile/:id', async (req, res, next) => {
-  try {
-    const doctorsList = await DoctorModel.find();
-    console.log(doctorsList);
-    const patientInfo = await PatientModel.findById(req.params.id);
-    res.render("editPatientProfile", { patientInfo, doctorsList });
-  } catch(err) {
-    next(err);
-  }
+router.get('/edit-profile/:id', (req, res, next) => {
+  PatientModel.findById(req.params.id)
+  .then(dbRes => res.render("editPatientProfile", { patientInfo: dbRes }))
+  .catch(next);
 });
+
+// router.get('/edit-profile/:id', async (req, res, next) => {
+//   try {
+//     const doctorsList = await DoctorModel.find();
+//     console.log(doctorsList);
+//     const patientInfo = await PatientModel.findById(req.params.id);
+//     res.render("editPatientProfile", { patientInfo, doctorsList });
+//   } catch(err) {
+//     next(err);
+//   }
+// });
 
 router.post('/edit-profile/:id', (req, res, next) => {
   const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
@@ -56,6 +62,8 @@ router.post('/edit-profile/:id', (req, res, next) => {
 });
 
 /* CREATE NEW ENTRY/DOCUMENT */
+// axios.get("/add-document")
+
 router.get("/add-document/:type", (req, res, next) => {
   if (type === "text") res.render("documents/createTextDocument");
   else if (type === "loop") res.render("documents/createLoopDocument");
