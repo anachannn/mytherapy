@@ -83,7 +83,6 @@ router.post("/patient/signin", async (req, res, next) => {
   router.post("/patient/signup", async (req, res, next) => {
     try {
       const newPatient = { ...req.body }; 
-      console.log("newPatient TRY 1: ", newPatient)
 
       // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
       // if (!regex.test(password)) {
@@ -101,7 +100,6 @@ router.post("/patient/signin", async (req, res, next) => {
       const foundPatient = await PatientModel.findOne({ email: newPatient.email });
   
       if (foundPatient) {
-        console.log("foundPatient: ", foundPatient);
         req.flash("warning", "Email already registered");
         res.redirect("/patient/signup");
 
