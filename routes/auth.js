@@ -48,7 +48,6 @@ router.post("/patient/signin", async (req, res, next) => {
     
     const { email, password } = req.body;
     const foundPatient = await PatientModel.findOne({ email: email });
-    console.log("foundPatient TRY 1: ", foundPatient);
   
     if (!foundPatient) {
 
@@ -67,11 +66,8 @@ router.post("/patient/signin", async (req, res, next) => {
       } else {
      
         const patientObject = foundPatient.toObject();
-        console.log("PATIENTOBJECT: ", patientObject);
         delete patientObject.password; 
-        console.log(req.session, "before defining current user");
         req.session.currentUser = patientObject;
-        console.log(req.session.currentUser);
         req.flash("success", "Successfully logged in...");
         res.redirect("/patient/dashboard");
       }
@@ -108,7 +104,6 @@ router.post("/patient/signin", async (req, res, next) => {
         const hashedPassword = bcrypt.hashSync(newPatient.password, 10);
         newPatient.password = hashedPassword;
         await PatientModel.create(newPatient);
-        console.log("newPatient TRY 2: ", newPatient);
         req.flash("success", "Congrats ! You are now registered !");
         res.redirect("/auth/patient/signin");
       }
@@ -171,7 +166,6 @@ router.post("/doctor/signin", async (req, res, next) => {
   router.post("/doctor/signup", async (req, res, next) => {
     try {
       const newDoctor = { ...req.body };
-      console.log("NEW DOCTOR:", newDoctor);
       // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
       // if (!regex.test(password)) {
       //   res
@@ -197,7 +191,6 @@ router.post("/doctor/signin", async (req, res, next) => {
         const hashedPassword = bcrypt.hashSync(newDoctor.password, 10);
         newDoctor.password = hashedPassword;
         await DoctorModel.create(newDoctor);
-        console.log("NEW DOCTOR TRY 2: ", newDoctor);
         req.flash("success", "Congrats ! You are now registered !");
         res.redirect("/auth/doctor/signin");
       }
