@@ -30,6 +30,19 @@
     padding-bottom: 50px;
 }
 
+.title-doc{
+    font-size: 50px;
+    text-align: center;
+    padding-top:30px;
+    
+}
+
+#doc-form{
+    margin:60px;
+    margin-left: 50px;
+    text-align: center;
+}
+
 .form-container{
     
     padding: 0 1.2rem;

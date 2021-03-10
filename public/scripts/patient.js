@@ -18,11 +18,13 @@ function toggleHidden(event, element) {
 
 const docBtns = document.getElementById("doc-btns");
 docBtns.addEventListener('click', () => {
-  docBtns.innerHTML = `<button id="doc-btns" class="journaling">Journaling</button>
-  <h2>Which type of document? </h2>
+  docBtns.innerHTML = `<button id="doc-btns" class="btn-patient">Journaling</button>
+  <div class="doc-container">
+  <h2 class="title-doc">Which type of document? </h2>
   <div id="doc-form">
-    <a href="/patient/create-text">Text</a>
-    <a href="/patient/create-loop">Loop</a>
+    <a class="btn-patient" href="/patient/create-text">Text</a>
+    <a class="btn-patient" href="/patient/create-loop">Loop</a>
+  </div>
   </div>`
 });
 

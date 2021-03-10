@@ -1,8 +1,13 @@
-<form method="post" action="/patient/add-document/text">
-    <h3>Write down your thoughts :</h3>
+<form class="form-container" method="post" action="/patient/add-document/text">
+    <h3 class="title-page">Write down your thoughts :</h3>
     <div>
         <label for="date">Date of the event:</label>
         <input type="date" name="date">
+    </div>
+
+      <div>
+        <label for="title">Title</label>
+        <input type="title" name="title" placeholder="Write your text here">
     </div>
 
     <div>
@@ -10,6 +15,6 @@
         <input type="text" placeholder="Write your text here" name="text">
     </div>
 
-    <button>SAVE</button>
+    <button>Save</button>
 
     </form>
