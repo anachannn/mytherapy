@@ -17,11 +17,6 @@ beige : #F4CD99
   margin: 0;
 }
 
-body {
-  padding: 50px;
-  
-}
-
 a {
   color: #00B7FF;
 }
@@ -46,7 +41,7 @@ a {
   text-align: center;
   margin:40px;
   padding:15px;
-  padding-left: 9Opx;
+  padding-left: 90px;
   padding-right: 90px;
   background-color: #f4cd99c0;
   color: white;
@@ -58,4 +53,114 @@ a {
   background-color: white;
   color: black;
   border: 2px solid #F4CD99;
+}
+
+/* PATIENT DASHBOARD */
+
+#all{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: flex-start;
+  height: 800px;
+}
+
+/* LEFT BAR */
+
+#left-bar{
+  height: 100%;
+  width: 15%;
+  background-color: rgb(244, 205, 153, .5);
+}
+
+#therapist{
+  margin-left: 20px;
+  margin-top: 10px;
+  position: fixed;
+}
+
+#therapist img{
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+  margin: 0 20px 20px;
+}
+
+#therapist h5{
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+#therapist p{
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+/* RIGHT BAR */
+
+#right-bar{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+#head-infos{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+#account{
+  display: flex;
+	align-items: flex-end;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+#account img{
+  width: 5em;
+  height: 5em;
+  margin: 0;
+  border-radius: 50%;
+}
+
+#account h5{
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 20px;
+}
+
+#head-infos h5{
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 20px;
+}
+
+#head-infos p{
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 0 20px ;
+}
+
+/* TABLE */
+
+#main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#document-manager{
+  width: 100%;
+  margin-top: 50px;
+  padding-left: 20px;
+}
+
+#add-doc{
+  width: 5%;
+  height: 5%;
+  margin: 10px;
 }

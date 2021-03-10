@@ -77,14 +77,10 @@
 }
 
 .btn-patient{
-    
-    font-size: larger;
     text-decoration: none;
     text-align: center;
-    margin:40px;
-    padding:15px;
-    padding-left: 9Opx;
-    padding-right: 90px;
+    margin: 10px;
+    padding: 15px 60px;
     background-color: #F4CD99;
     color: white;
     border:none;
@@ -93,21 +89,17 @@
 .btn-patient a {
     text-decoration: none;
     color:white;
-    font-size: large;
-
 }
 
 .btn-patient a:hover {
     background-color: white;
-  color: black;
-  
-
+    color: black;
 }
+
 .btn-patient:hover{
   background-color: white;
   color: black;
   border: 2px solid #F4CD99;
- 
 }
 
 .btn-doctor{

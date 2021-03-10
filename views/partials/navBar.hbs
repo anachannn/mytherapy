@@ -4,15 +4,5 @@
             <h1>My therapy</h1>
             <a href="/about" id="about">About</a>
         {{/unless}}
-        {{#ifCond req.session.currentUser.role "===" "doctor"}}
-            <img src="https://www.notion.so/Links-to-images-87d43aac3f91466d855a3e18fc098996#5ff389ca3d5041679fc8ef58f1164781" alt="Blue cloud" class="nav-cloud">
-            <h1 class="nav-title">My therapy</h1>
-            <a href="/signout" class="nav-signout">Sign out</a>
-        {{/ifCond}}
-        {{#ifCond req.session.currentUser.role "===" "patient"}}
-            <img src="https://www.notion.so/Links-to-images-87d43aac3f91466d855a3e18fc098996#1a742b4f051b438a8e92009d0d70c4b5" alt="Orange cloud" class="nav-cloud">
-            <h1 class="nav-title">My therapy</h1>
-            <a href="/signout" class="nav-signout">Sign out</a>
-        {{/ifCond}}
     </nav>
 </header>
