@@ -130,7 +130,7 @@ footer{
   margin: 0 20px 20px;
 }
 
-#therapist h5{
+#therapist h2{
   font-size: 1.5em;
   font-weight: 700;
   margin: 20px 0;
@@ -199,7 +199,7 @@ footer{
   border: 7px solid white;
 }
 
-#account h5{
+#account h2{
   font-size: 1.3em;
   font-weight: 600;
   margin: 10px;
@@ -207,7 +207,7 @@ footer{
   text-align: end;
 }
 
-#head-infos h5{
+#head-infos h2{
   font-size: 1.5em;
   font-weight: 700;
   margin: 20px;
