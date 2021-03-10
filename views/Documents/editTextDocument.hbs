@@ -1,15 +1,21 @@
-<form action="/edit-document/{{text._id}}">
-    <h3>Write down your thoughts :</h3>
-    <div>
-        <label for="date">Date of the event:</label>
-        <input type="date" name="date" value="{{text.date}}">
-    </div>
 
-    <div>
-        <label for="text">Your text</label>
-        <input type="text" placeholder="Write your text here" name="text" value={{text.text}}>
-    </div>
+<h3 class="title-page">Edit your text document </h3>
+<div class="form-container">
+<form  class="form" method="post" action="/edit-document/{{text._id}}">
+  
+        <label for="date">Date of the event</label>
+        <input class="input" type="date" name="date" value="{{text.date}}">
+   
+        <label  for="title">Title</label>
+        <text-area><input class="input" type="title" name="title" placeholder="Write your text here" value="{{text.title}}"></text-area>
+   
+        <label  for="text">Your text</label>
+        <textarea class="input-text" name="text" rows="20" cols="33">{{text.text}}
+            </textarea>
 
-    <button type="submit">Edit this text</button>
 
-    </form>
+    <button class="btn-patient">Save your changes</button>
+
+</form>
+
+</div>

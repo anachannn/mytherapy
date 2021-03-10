@@ -1,67 +1,52 @@
-<form method="post" action="/patient/add-document/loop">
-    <h3>Describe your loop:</h3>
-    <div>
+   <h3 class="title-page">Describe your thoughts and feelings</h3>
+
+<div class="form-container">
+<form class="form" method="post" action="/patient/add-document/loop">
+ 
+
         <label for="date">Date of the event:</label>
         <input type="date" name="date">
-    </div>
 
-    <div>
+        <label for="title">Title</label>
+        <input type="text" placeholder="Title" name="title">
+  
         <label for="triggers">What triggered this loop?</label>
-        <input type="text" placeholder="Trigger(s)" name="triggers">
-    </div>
+      <textarea class="input-text" name="triggers" rows="15" cols="20" placeholder="Your trigger(s)"></textarea>
 
-    <div>
         <label for="emotionalFeelings">Which emotions did you felt?</label>
-        <input type="text" placeholder="Emotional feeling(s)" name="emotionalFeelings">
-    </div>
+        <textarea class="input-text" name="emotionalFeelings" rows="15" cols="20" placeholder="The emotions you felt"></textarea>
 
-    <div>
         <label for="bodyFeelings">How did your body felt?</label>
-        <input type="text" placeholder="Body feeling(s)" name="bodyFeelings">
-    </div>
+        <textarea class="input-text" name="bodyFeelings" rows="15" cols="20" placeholder="Your body feeling(s)"></textarea>
 
-    <div>
         <label for="thoughts">What were you thinking?</label>
-        <input type="text" placeholder="Thought(s)" name="thoughts">
-    </div>
+        <textarea class="input-text"  name="thoughts" rows="15" cols="20" placeholder="Your thought(s)"></textarea>   
 
-    <div>
         <label for="behaviors">What did you do?</label>
-        <input type="text" placeholder="Behavior(s)" name="behaviors">
-    </div>
+        <textarea class="input-text" name="behaviors" rows="15" cols="20" placeholder="Your behavior(s)"></textarea>  
 
-    <h4>Alternative thoughts</h4>
-    <div>
+    <h4 class="title-doc">Alternative thoughts</h4>
+  
         <label for="chooseOneThought">First, choose one thought:</label>
-        <input type="text" placeholder="One thought" name="chooseOneThought">
-    </div>
+        <textarea class="input-text" name="chooseOneThought" rows="15" cols="20" placeholder="The main thought this time"></textarea>   
 
-    <p>Then, answer these questions:</p>
-    <div>
         <label for="whatElse">What else could I tell me in this situation ?</label>
-        <input type="text" placeholder="Should write two answers..." name="whatElse">
-    </div>
+        <textarea class="input-text" name="whatElse" rows="15" cols="20" placeholder="Write your text here"></textarea>   
 
-    <div>
-        <label for="whatSomeone">What <i>choose someone randomly</i> could think about this situation ?</label>
-        <input type="text" placeholder="Should choose two people..." name="whatSomeone">
-    </div>
+        <label for="whatSomeone">What <i>x,y or z</i> could think about this situation ?</label>
+        <textarea class="input-text" name="whatSomeone" rows="15" cols="20" placeholder="Choose someone you trust"></textarea>   
 
-    <div>
         <label for="whatOutsider">What an outside observer could tell about it ?</label>
-        <input type="text" placeholder="Thoughts of an outsider..." name="whatOutsider">
-    </div>
+        <textarea class="input-text" name="whatOutsider" rows="15" cols="20" placeholder="Write your text here"></textarea> 
 
-    <div>
         <label for="whatTwoYears">What would I say about this situation in two years ?</label>
-        <input type="text" placeholder="Should write two thoughts..." name="whatTwoYears">
-    </div>
+        <textarea class="input-text" name="whatTwoYears" rows="15" cols="20" placeholder="Write your text here"></textarea>  
 
-    <div>
         <label for="alternativeThoughts">With all these answers, which alternative thought(s) work for you ?</label>
-        <input type="text" placeholder="Alternative thought(s)" name="alternativeThoughts">
-    </div>
+        <textarea class="input-text" name="alternativeThoughts" rows="15" cols="20" placeholder="Write your alternative thought(s) here"></textarea>
 
-    <button>SAVE</button>
+    <button class="btn-patient">Save</button>
 
 </form>
+
+</div>
