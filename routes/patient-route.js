@@ -175,8 +175,16 @@ router.post("/add-document/:type", (req, res, next) => {
 
 /* UPDATE ENTRY/DOCUMENT */
 router.get("/edit-document/:type/:id", (req, res, next) => {
-  if (req.params.type === "text") res.render("documents/updateTextDocument");
-  else if (req.params.type === "loop") res.render("documents/updateLoopDocument");
+  if (req.params.type === "text") {
+    TextModel.findByIdAndUpdate(req.params.id)
+    .then(textToUpdate => res.render("documents/editTextDocument", {text: textToUpdate, title: "MyTherapy | Update text document"}))
+    .catch(next);
+  }
+  else if (req.params.type === "loop") {
+    LoopModel.findByIdAndUpdate(req.params.id)
+    .then(loopToUpdate => res.render("documents/editLoopDocument"), {loop: loopToUpdate, title: "MyTherapy | Update loop document"})
+    .catch(next);
+  }
 });
 
 router.post("/edit-document/:type", (req, res, next) => {
