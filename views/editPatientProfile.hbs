@@ -44,13 +44,12 @@
 
   
         <label for="myTherapist">My Therapist</label>
-        <input type="text" name="myTherapist" id="input-edit-myTherapist" value="{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}}">
         <select class="select hidden" name="myTherapist" id="select-edit-myTherapist">
+          <option class="select-option" value="{{patientInfo.myTherapist._id}}" selected>Currently: {{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}}</option>
           {{#each doctorsList}}
             <option class="select-option" value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
           {{/each}}
         </select>
-        {{!--  --}}
     
         <label for="myTherapy">My Therapy</label>
         <select class="select" name="myTherapy" id="myTherapy">
