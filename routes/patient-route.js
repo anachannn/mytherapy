@@ -99,10 +99,19 @@ router.get("/delete/:id", (req, res, next) => {
 /* CREATE NEW ENTRY/DOCUMENT */
 // axios.get("/add-document")
 
-router.get("/add-document/:type", (req, res, next) => {
-  if (type === "text") res.render("documents/createTextDocument");
-  else if (type === "loop") res.render("documents/createLoopDocument");
+
+router.get("/add-doc", (req, res, next) => {
+  res.render("documents/createDocument")
 });
+
+router.get("/create-text", (req, res, next) => {
+  res.render("documents/createTextDocument")
+});
+
+router.get("/create-loop", (req, res, next) => {
+  res.render("documents/createLoopDocument")
+});
+
 
 router.post("/add-document/:type", (req, res, next) => {
   const patientId = req.session.currentUser._id;
