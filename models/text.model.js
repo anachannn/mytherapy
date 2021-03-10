@@ -19,6 +19,10 @@ const textSchema = new Schema({
     text: {
         type: String,
         required: true
+    },
+    docType: {
+      type: String,
+      default: "text"
     }
 });
 

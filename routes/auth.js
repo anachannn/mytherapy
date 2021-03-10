@@ -10,12 +10,12 @@ const mongoose = require('mongoose');
 //Patient
 
 router.get("/patient/signin", (req, res, next) => {
-    res.render("auth/patient-signin");
+    res.render("auth/patient-signin", { title: "MyTherapy | Sign-in"});
   });
   
   router.get("/patient/signup", async (req, res, next) => {
     const doctorsList = await DoctorModel.find();
-    res.render("auth/patient-signup", { doctorsList });
+    res.render("auth/patient-signup", { doctorsList, title: "MyTherapy | Sign up" });
   });
   
   router.get("/patient/signout", async (req, res, next) => {
@@ -27,11 +27,11 @@ router.get("/patient/signin", (req, res, next) => {
 //Doctor
 
   router.get("/doctor/signin", (req, res, next) => {
-    res.render("auth/doctor-signin");
+    res.render("auth/doctor-signin", { title: "MyTherapy | Sign-in"});
   });
   
   router.get("/doctor/signup", (req, res, next) => {
-    res.render("auth/doctor-signup");
+    res.render("auth/doctor-signup", { title: "MyTherapy | Sign up"});
   });
   
   router.get("/doctor/signout", (req, res, next) => {

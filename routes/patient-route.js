@@ -17,7 +17,9 @@ router.get('/', (req, res, next) => {
 router.get("/dashboard", (req, res, next) => {
   PatientModel.findById(req.session.currentUser._id)
     .populate("myTherapist myTexts myLoops")
-    .then(dbRes => res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard" }))
+    .then(dbRes => {
+      res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard" });
+    })
     .catch(next);
 });
 
@@ -28,8 +30,9 @@ router.get('/edit-profile/:id', (req, res, next) => {
   .then(dbRes => {
     doctorsList = dbRes;
     PatientModel.findById(req.params.id)
-    .populate("myTherapist")
+    .populate("myTherapist myTexts myLoops")
     .then(dbRes => {
+      console.log("dbRes after findbyId and populate: ", dbRes);
       currentDoctor = dbRes.myTherapist._id;
       res.render("editPatientProfile", { patientInfo: dbRes, doctorsList })
     })
@@ -97,9 +100,6 @@ router.get("/delete/:id", (req, res, next) => {
 
 /* --------------- DOCUMENTS --------------- */
 /* CREATE NEW ENTRY/DOCUMENT */
-// axios.get("/add-document")
-
-
 router.get("/add-doc", (req, res, next) => {
   res.render("documents/createDocument")
 });
@@ -112,20 +112,27 @@ router.get("/create-loop", (req, res, next) => {
   res.render("documents/createLoopDocument")
 });
 
-
 router.post("/add-document/:type", (req, res, next) => {
+  console.log(req.params);
   const patientId = req.session.currentUser._id;
-  if(type === "text") {
-    const { date, text } = req.body;
-    TextModel.create({ patientId, date, text })
+  console.log(patientId);
+  if(req.params.type === "text") {
+    console.log("inside if text");
+    console.log(req.body);
+    const { date, title, text } = req.body;
+    TextModel.create({ patientId, date, title, text })
     .then(dbRes => {
-      console.log("New document created!");
-      res.redirect("/patient/dashboard");
+      PatientModel.findByIdAndUpdate(patientId, { $push: {myTexts: dbRes._id} })
+      .then(dbRes => console.log("New document created!"))
+      .catch(next);
+      res.redirect("/patient/dashboard/");
     })
     .catch(next);
-  } else if (type === "loop") {
+  } else if (req.params.type === "loop") {
+      console.log("inside if loop");
       const {
         date,
+        title,
         triggers,
         emotionalFeelings,
         bodyFeelings,
@@ -142,6 +149,7 @@ router.post("/add-document/:type", (req, res, next) => {
       LoopModel.create({
         patientId,
         date,
+        title,
         triggers,
         emotionalFeelings,
         bodyFeelings,
@@ -155,8 +163,10 @@ router.post("/add-document/:type", (req, res, next) => {
         alternativeThoughts
       })
       .then(dbRes => {
-        console.log("Document successfully created");
-        res.redirect("/patient/dashboard");
+        PatientModel.findByIdAndUpdate(patientId, { $push: {myLoops: dbRes._id} })
+        .then(dbRes => console.log("New document created!"))
+        .catch(next);
+        res.redirect("/patient/dashboard/");
       })
       .catch(next);
   }
@@ -164,23 +174,24 @@ router.post("/add-document/:type", (req, res, next) => {
 });
 
 /* UPDATE ENTRY/DOCUMENT */
-router.get("/edit-document/:type", (req, res, next) => {
-  if (type === "text") res.render("documents/updateTextDocument");
-  else if (type === "loop") res.render("documents/updateLoopDocument");
+router.get("/edit-document/:type/:id", (req, res, next) => {
+  if (req.params.type === "text") res.render("documents/updateTextDocument");
+  else if (req.params.type === "loop") res.render("documents/updateLoopDocument");
 });
 
 router.post("/edit-document/:type", (req, res, next) => {
-  if(type === "text") {
-    const { date, text } = req.body;
-    TextModel.findByIdAndCreate(req.params.id, { date, text })
+  if(req.params.type === "text") {
+    const { date, title, text } = req.body;
+    TextModel.findByIdAndCreate(req.params.id, { date, title, text })
     .then(dbRes => {
       console.log("Document updated!");
       res.redirect("/patient/dashboard");
     })
     .catch(next);
-  } else if (type === "loop") {
+  } else if (req.params.type === "loop") {
       const {
         date,
+        title,
         triggers,
         emotionalFeelings,
         bodyFeelings,
@@ -196,6 +207,7 @@ router.post("/edit-document/:type", (req, res, next) => {
     
       LoopModel.findByIdAndUpdate(req.params.id, {
         date,
+        title,
         triggers,
         emotionalFeelings,
         bodyFeelings,
@@ -219,15 +231,15 @@ router.post("/edit-document/:type", (req, res, next) => {
 
 
 /* DELETE ENTRY/DOCUMENT */
-router.get('/document-delete/:type', (req, res, next) => {
-  if(type === "text") {
+router.get('/document-delete/:type/:id', (req, res, next) => {
+  if(req.params.type === "text") {
     TextModel.findByIdAndDelete(req.params.id)
     .then(dbRes => {
       console.log("Document successfully deleted");
       res.redirect("/patient/dashboard");
     })
     .catch(next);
-  } else if (type === "loop") {
+  } else if (req.params.type === "loop") {
       LoopModel.findByIdAndDelete(req.params.id)
       .then(dbRes => {
         console.log("Document successfully deleted");

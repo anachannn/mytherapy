@@ -25,6 +25,10 @@ const loopSchema = new Schema({
     whatOutsider: String,
     whatTwoYears: String,
     alternativeThoughts: String,
+    docType: {
+      type: String,
+      default: "loop"
+    }
 });
 
 const LoopModel = mongoose.model('loops', loopSchema);

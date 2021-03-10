@@ -34,8 +34,30 @@
             </div>
         </div>
         <div id="main">
-            <div id="document-manager">{{>patientManageDocuments}}</div>
-                <a id="add-doc" href="/patient/add-doc"><i class="fas fa-plus"></i></a>
-            </div>
+          <div id="document-manager">
+            <div class="big-container manage-patients-wrapper">
+              <h3 class="manage-patients-title">Your latest documents</h3>
+              <table class="patients-manage-table">
+                <thead>
+                  <tr class="table-row">
+                    <th class="table-head-patient">Type</th>
+                    <th class="table-head-patient">Date</th>
+                    <th class="table-head-patient">Title</th>
+                    <th class="table-head-patient">Edit</th>
+                    <th class="table-head-patient">Delete</th>
+              
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {{>patientManageDocuments patientInfo.myTexts}}
+                  {{>patientManageDocuments patientInfo.myLoops}}
+                </tbody> 
+              </table>
+          </div>
+        </div>
+            
+        <a id="add-doc" href="/patient/add-doc"><i class="fas fa-plus"></i></a>
+      </div>
     </section>
 </section>
