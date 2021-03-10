@@ -4,15 +4,18 @@
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    {{#each scripts}}
-      <script type="module" src="scripts/{{this}}"></script>
-    {{/each}}
+    {{!-- {{#each scripts}}
+      <script type="module" src="/scripts/{{this}}"></script>
+    {{/each}} --}}
+
+    <script type="module" src="/scripts/patient.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <link href="https://res.cloudinary.com/dcbzfldni/image/upload/v1615308951/MyTherapy/favicone-nuage-beige_ukld4p.png" rel="icon" type="image/x-icon" />
 
   </head>
   <body>
+    <a href="/">Home</a>
     {{>navBar}}
     {{{body}}}
     {{>footerBar}}

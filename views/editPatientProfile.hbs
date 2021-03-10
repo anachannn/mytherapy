@@ -1,61 +1,61 @@
-<h2>Edit your profile</h2>
+<h2 class="title-page">Edit your profile</h2>
 
-<form action="/patient/edit-profile/{{patientInfo._id}}" method="post">
+<div class="form-container">
+
+<form class="form" action="/patient/edit-profile/{{patientInfo._id}}" method="post">
 
 
-<img src="{{patientInfo.photo}}" alt="Profile picture">
+<img class="img-patient" src="{{patientInfo.photo}}" alt="Profile picture">
 
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="{{patientInfo.name}}">
-    </div>
-
-    <div>
-        <label for="lastname">Lastname:</label>
-        <input type="text" name="lastname" value="{{patientInfo.lastname}}">
-    </div>
     
-    <div>
-        <label for="email">Email:</label>
+        <label for="name">Name</label>
+        <input type="text" name="name" value="{{patientInfo.name}}">
+    
+
+ 
+        <label for="lastname">Lastname</label>
+        <input type="text" name="lastname" value="{{patientInfo.lastname}}">
+ 
+    
+
+        <label for="email">Email</label>
         <input type="text" name="email" value="{{patientInfo.email}}">
-    </div>
 
-    <div>
-        <label for="phoneNumber">Phone number:</label>
+
+
+        <label for="phoneNumber">Phone number</label>
         <input type="text" name="phoneNumber" value="{{patientInfo.phoneNumber}}">
-    </div>
+ 
 
-    <div>
-        <label for="address">Address:</label>
+  
+        <label for="address">Address</label>
         <input type="text" name="address" value="{{patientInfo.location.address}}">
-    </div>
 
-    <div>
-        <label for="zipcode">Zip code:</label>
+
+ 
+        <label for="zipcode">Zip code</label>
         <input type="text" name="zipcode" value="{{patientInfo.location.zipcode}}">
-    </div>
+   
 
-    <div>
-        <label for="city">City:</label>
+
+        <label for="city">City</label>
         <input type="text" name="city" value="{{patientInfo.location.city}}">
-    </div>
 
-    <div>
-        <label for="myTherapist">My Therapist:</label>
+
+  
+        <label for="myTherapist">My Therapist</label>
         <input type="text" name="myTherapist" id="myTherapist" value="{{patientInfo.myTherapist}}">
-    </div>
-
-    <div>
-        <label for="myTherapy">My Therapy:</label>
+    
+        <label for="myTherapy">My Therapy</label>
         <input type="text" name="myTherapy" value="{{patientInfo.myTherapy}}">
-    </div>
-
-    <div>
-        <label for="myGoals">My goal(s):</label>
+  
+        <label for="myGoals">My goal</label>
         <input type="text" name="myGoals" value="{{patientInfo.myGoals}}">
-    </div>
+  
 
 
-<button type="submit">Save your changes</button>
+<button class="btn-patient" type="submit">Save your changes</button>
 
 </form>
+
+</div>

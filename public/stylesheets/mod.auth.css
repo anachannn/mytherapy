@@ -1,3 +1,21 @@
+/* Dashboard patient*/
+#add-doc{
+    background-color: #F4CD99;
+    padding:20px;
+    border:none;
+}
+
+/* in patient/edit-profile*/
+
+.img-patient{
+    width: 200px;
+    height:200px;
+    margin-bottom: 30px;;
+    
+}
+
+/* signup, signin*/
+
 .title-page{
     font-size: 70px;
     text-align: center;
@@ -22,7 +40,7 @@
     height: calc(100vh - (84px));
 }
 
-.form{
+.form {
     font-size: larger;
     display: flex;
     flex-direction: column;
@@ -72,6 +90,19 @@
     border:none;
 }
 
+.btn-patient a {
+    text-decoration: none;
+    color:white;
+    font-size: large;
+
+}
+
+.btn-patient a:hover {
+    background-color: white;
+  color: black;
+  
+
+}
 .btn-patient:hover{
   background-color: white;
   color: black;

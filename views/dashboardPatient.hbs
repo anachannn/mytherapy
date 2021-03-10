@@ -1,7 +1,7 @@
 <section id="left-bar">
     <div id="therapist">
         <h5>My Therapist</h5>
-        <img src="{{patientInfo.myTherapist.photo}}" alt="{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}} picture">
+        <img class="img-patient" src="{{patientInfo.myTherapist.photo}}" alt="{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}} picture">
         <p>{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}}</p>
     </div>
     <div id="my-documents">
@@ -19,12 +19,12 @@
         <p>{{patientInfo.myTherapy}}</p>
     </div>
     <div id="account">
-        <img src="{{patientInfo.photo}}" alt="{{patientInfo.name}} {{patientInfo.lastname}} picture">
+        <img class="img-patient" src="{{patientInfo.photo}}" alt="{{patientInfo.name}} {{patientInfo.lastname}} picture">
         <h5>{{patientInfo.name}} {{patientInfo.lastname}}</h5>
-        <button><a href="/patient/edit-profile/{{patientInfo._id}}">Edit Profile</a></button>
+        <button class="btn-patient"><a href="/patient/edit-profile/{{patientInfo._id}}">Edit Profile</a></button>
     </div>
     <div id="goal">
-        <h5>GOALS:</h5>
+        <h5>My goals</h5>
         <p>{{patientInfo.myGoals}}</p>
     </div>
 </section>
