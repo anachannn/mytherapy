@@ -44,10 +44,20 @@
 
   
         <label for="myTherapist">My Therapist</label>
-        <input type="text" name="myTherapist" id="myTherapist" value="{{patientInfo.myTherapist}}">
+        <input type="text" name="myTherapist" id="input-edit-myTherapist" value="{{patientInfo.myTherapist.name}} {{patientInfo.myTherapist.lastname}}">
+        <select class="select hidden" name="myTherapist" id="select-edit-myTherapist">
+          {{#each doctorsList}}
+            <option class="select-option" value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
+          {{/each}}
+        </select>
+        {{!--  --}}
     
         <label for="myTherapy">My Therapy</label>
-        <input type="text" name="myTherapy" value="{{patientInfo.myTherapy}}">
+        <select class="select" name="myTherapy" id="myTherapy">
+            <option class="select-option" value="Cognitive-behavioral therapy (CBT)" selected>Cognitive-behavioral therapy (CBT)</option>
+            <option class="select-option" value="Psychoanalytic therapy">Psychoanalytic therapy</option>
+            <option class="select-option" value="Group therapy">Group therapy</option>
+        </select>
   
         <label for="myGoals">My goal</label>
         <input type="text" name="myGoals" value="{{patientInfo.myGoals}}">

@@ -4,16 +4,18 @@ const express = require("express");
 const router = express.Router();
 const PatientModel = require('./../models/patient.model');
 const DoctorModel = require('./../models/doctor.model');
+const TextModel = require('./../models/text.model');
+const LoopModel = require('./../models/loop.model');
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
-  res.render("auth/doctor.signin");
+  res.render("auth/doctor-signin");
 });
 
 /* DASHBOARD -> SEE ALL PATIENTS */
 router.get('/dashboard', (req, res, next) => {
   DoctorModel.findById(req.session.currentUser._id)
-  .populate("mypatients")
+  .populate("myPatients")
   .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes }))
   .catch(next);
 });
@@ -28,7 +30,7 @@ router.post('add-patient', (req, res, next) => {
   PatientModel.create({ name, lastname, email, password })
   .then(dbRes => {
     console.log("Patient successfully added!");
-    res.redirect('/dashboard');
+    res.redirect('/doctor/dashboard');
   })
   .catch(next);
 });

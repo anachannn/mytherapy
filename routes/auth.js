@@ -103,9 +103,16 @@ router.post("/patient/signin", async (req, res, next) => {
 
         const hashedPassword = bcrypt.hashSync(newPatient.password, 10);
         newPatient.password = hashedPassword;
-        await PatientModel.create(newPatient);
-        req.flash("success", "Congrats ! You are now registered !");
-        res.redirect("/auth/patient/signin");
+        PatientModel.create(newPatient)
+        .then(dbRes => {
+          DoctorModel.findByIdAndUpdate(dbRes.myTherapist, { $push: {myPatients: dbRes._id} })
+          .then(dbRes => console.log("New patient created: ", dbRes))
+          .catch(err => console.log(err));
+
+          req.flash("success", "Congrats ! You are now registered !");
+          res.redirect("/auth/patient/signin");
+        })
+        
       }
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {

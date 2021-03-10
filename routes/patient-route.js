@@ -22,9 +22,16 @@ router.get("/dashboard", (req, res, next) => {
 
 /* EDIT PROFILE */
 router.get('/edit-profile/:id', (req, res, next) => {
-  PatientModel.findById(req.params.id)
-  .then(dbRes => res.render("editPatientProfile", { patientInfo: dbRes }))
-  .catch(next);
+  let doctorsList;
+  DoctorModel.find()
+  .then(dbRes => {
+    doctorsList = dbRes;
+    PatientModel.findById(req.params.id)
+    .populate("myTherapist")
+    .then(dbRes => res.render("editPatientProfile", { patientInfo: dbRes, doctorsList }))
+    .catch(next);
+  })
+  .catch(next);  
 });
 
 // router.get('/edit-profile/:id', async (req, res, next) => {
@@ -39,6 +46,15 @@ router.get('/edit-profile/:id', (req, res, next) => {
 // });
 
 router.post('/edit-profile/:id', (req, res, next) => {
+  let currentDoctor, newDoctor;
+  PatientModel.find(req.params.id)
+  .then(dbRes => currentDoctor = dbRes.myTherapist)
+  .catch(err => console.log(err));
+
+  newDoctor = req.body.myTherapist;
+  console.log("current doctor:", currentDoctor);
+  console.log("new doctor: ", newDoctor);
+
   const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
   PatientModel.findByIdAndUpdate(req.params.id, {
     name,
