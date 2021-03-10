@@ -1,26 +1,27 @@
-<section id="left-bar">
-    <h2>My Patients</h2>
-    <ul>
-        {{#each doctorInfo.myPatients}}
-        <li>
-            {{this.name}} {{this.lastname}}
-            
-        </li>
-        {{/each}}
-    </ul>
+<section id="all-for-doctor">
+    <section id="left-doctor-bar">
+        <h2>My Patients:</h2>
+        <ul>
+            {{#each doctorInfo.myPatients}}
+            <li>
+                {{this.name}} {{this.lastname}}
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+    <section id="doc-header-bar">
+        <img src="{{doctorInfo.photo}}" alt="{{doctorInfo.name}} {{doctorInfo.lastname}} picture">
+        <h5>{{doctorInfo.name}} {{doctorInfo.lastname}}</h5>
+    </section>
+    <section id="main"> 
+        {{!-- for each quand clique sur un patient --}}
+        <div>
+            <div id="agenda"></div>
+        <button id="add-doc">
+            <i class="fas fa-plus"></i>
+        </button>
+        </div>
+        {{!-- fin du each --}}
+    </section>
 </section>
-<section id="doc-header-bar">
-    <img src="{{doctorInfo.photo}}" alt="{{doctorInfo.name}} {{doctorInfo.lastname}} picture">
-    <h5>{{doctorInfo.name}} {{doctorInfo.lastname}}</h5>
-</section>
-<section id="main"> 
-    {{!-- for each quand clique sur un patient --}}
-    <div>
-        <div id="agenda">
-    </div>
-    <button id="add-doc">
-        <i class="fas fa-plus"></i>
-    </button>
-    </div>
-    {{!-- fin du each --}}
-</section>
+

@@ -177,9 +177,11 @@ footer{
     text-align: end;
     margin: 10px;
     color: white;
-    background-color: white;
-    border: none;
     transition: .2s;
+}
+
+.btn-patient-profile a{
+  color: white;
 }
 
 .btn-patient-profile i{
@@ -243,6 +245,7 @@ footer{
   align-items: center;
   transition: .2s;
   border-radius: 20%;
+  color: black;
 }
 
 #add-doc:hover{

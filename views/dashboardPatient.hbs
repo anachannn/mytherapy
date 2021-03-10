@@ -3,7 +3,7 @@
         <a href="/"><img src="https://res.cloudinary.com/dcbzfldni/image/upload/v1615282779/MyTherapy/nuage-beige_r5ahwj.png" alt="Nuage beige"></a>
         <h1>My Therapy</h1>
     </div>
-    <a href="/auth/patient/logout">Log out</a>
+    <a href="/auth/patient/signout">Log out</a>
 </nav>
 
 <section id="all">
@@ -25,8 +25,8 @@
             </div> 
             <div id="account">
                 <div id="bttns">
-                    <button class="btn-patient-profile">Edit profile<i class="fas fa-user-edit"><a href="/patient/edit-profile/{{patientInfo._id}}"></a></i></button>
-                    <button class="btn-patient-profile">Delete Profile<i class="fas fa-user-times"><a href="/patient/delete/{{patientInfo._id}}"></a></i></button>
+                    <a class="btn-patient-profile" href="/patient/edit-profile/{{patientInfo._id}}">Edit profile<i class="fas fa-user-edit"></i></a>
+                    <a class="btn-patient-profile" href="/patient/delete/{{patientInfo._id}}">Delete Profile<i class="fas fa-user-times"></i></a>
                 </div>
                 <img class="img-patient" src="{{patientInfo.photo}}"
                     alt="{{patientInfo.name}} {{patientInfo.lastname}} picture">
@@ -35,10 +35,7 @@
         </div>
         <div id="main">
             <div id="document-manager">{{>patientManageDocuments}}</div>
-            <button id="add-doc">
-                <i class="fas fa-plus">
-                <a href="/patient/add-doc">Coucou</a><i>
-            </button>
-        </div>
+                <a id="add-doc" href="/patient/add-doc"><i class="fas fa-plus"></i></a>
+            </div>
     </section>
 </section>
