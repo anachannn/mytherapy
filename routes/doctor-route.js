@@ -9,14 +9,14 @@ const LoopModel = require('./../models/loop.model');
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
-  res.render("auth/doctor-signin");
+  res.render("auth/doctor-signin", {title: "MyTherapy | Doctor: sign-in"});
 });
 
 /* DASHBOARD -> SEE ALL PATIENTS */
 router.get('/dashboard', (req, res, next) => {
   DoctorModel.findById(req.session.currentUser._id)
   .populate("myPatients")
-  .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes }))
+  .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes, title: "MyTherapy | Doctor dashboard" }))
   .catch(next);
 });
 

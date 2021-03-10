@@ -20,7 +20,7 @@ router.get("/patient/signin", (req, res, next) => {
   
   router.get("/patient/signout", async (req, res, next) => {
     req.session.destroy(function (err) {
-      res.redirect("/patient/signin");
+      res.redirect("/auth/patient/signin");
     });
   });
 
@@ -36,7 +36,7 @@ router.get("/patient/signin", (req, res, next) => {
   
   router.get("/doctor/signout", (req, res, next) => {
     req.session.destroy(function (err) {
-      res.redirect("/doctor/signin");
+      res.redirect("/auth/doctor/signin");
     });
   });
 

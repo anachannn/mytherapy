@@ -6,17 +6,18 @@ const PatientModel = require('./../models/patient.model');
 const DoctorModel = require('./../models/doctor.model');
 const TextModel = require('./../models/text.model');
 const LoopModel = require('./../models/loop.model');
+let currentDoctor, newDoctor;
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
-  res.render("auth/patient-signin");
+  res.render("auth/patient-signin", {title: "MyTherapy | Patient: sign-in"});
 });
 
 /* DASHBOARD -> SEE ALL DOCUMENTS */
 router.get("/dashboard", (req, res, next) => {
   PatientModel.findById(req.session.currentUser._id)
     .populate("myTherapist myTexts myLoops")
-    .then(dbRes => res.render("dashboardPatient", { patientInfo: dbRes }))
+    .then(dbRes => res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard" }))
     .catch(next);
 });
 
@@ -28,32 +29,33 @@ router.get('/edit-profile/:id', (req, res, next) => {
     doctorsList = dbRes;
     PatientModel.findById(req.params.id)
     .populate("myTherapist")
-    .then(dbRes => res.render("editPatientProfile", { patientInfo: dbRes, doctorsList }))
+    .then(dbRes => {
+      currentDoctor = dbRes.myTherapist._id;
+      res.render("editPatientProfile", { patientInfo: dbRes, doctorsList })
+    })
     .catch(next);
   })
   .catch(next);  
 });
 
-// router.get('/edit-profile/:id', async (req, res, next) => {
-//   try {
-//     const doctorsList = await DoctorModel.find();
-//     console.log(doctorsList);
-//     const patientInfo = await PatientModel.findById(req.params.id);
-//     res.render("editPatientProfile", { patientInfo, doctorsList });
-//   } catch(err) {
-//     next(err);
-//   }
-// });
-
 router.post('/edit-profile/:id', (req, res, next) => {
-  let currentDoctor, newDoctor;
-  PatientModel.find(req.params.id)
-  .then(dbRes => currentDoctor = dbRes.myTherapist)
+  PatientModel.findById(req.params.id)
+  .then(editRes => {
+    newDoctor = req.body.myTherapist;
+    console.log("---------- NEW TRY ----------");
+    console.log("current doctor:", currentDoctor);
+    console.log("new doctor: ", newDoctor);
+    if (newDoctor !== currentDoctor) {
+      DoctorModel.findByIdAndUpdate(currentDoctor, { $pull: {myPatients: editRes._id} })
+      .then(() => {
+        DoctorModel.findByIdAndUpdate(newDoctor, { $push: {myPatients: editRes.id} })
+        .then(console.log(editRes))
+        .catch(next);
+      })
+      .catch(next);
+    }
+  })
   .catch(err => console.log(err));
-
-  newDoctor = req.body.myTherapist;
-  console.log("current doctor:", currentDoctor);
-  console.log("new doctor: ", newDoctor);
 
   const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
   PatientModel.findByIdAndUpdate(req.params.id, {
@@ -77,6 +79,23 @@ router.post('/edit-profile/:id', (req, res, next) => {
   .catch(next);
 });
 
+router.get("/delete/:id", (req, res, next) => {
+  PatientModel.findById(req.params.id)
+  .then(dbRes => {
+    console.log("dbRes: ", dbRes);
+    DoctorModel.findByIdAndUpdate(dbRes.myTherapist._id, { $pull: {myPatients: dbRes._id} })
+    .then(() => {
+      PatientModel.findByIdAndDelete(req.params.id)
+      .then(deleteRes => console.log("Patient successfully deleted"))
+      .catch(next);
+    })
+    .catch(next);
+  })
+  .catch(next);
+  res.redirect("/auth/patient/signout");
+});
+
+/* --------------- DOCUMENTS --------------- */
 /* CREATE NEW ENTRY/DOCUMENT */
 // axios.get("/add-document")
 
