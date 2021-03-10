@@ -1,27 +1,30 @@
+<nav id="doctor-nav">
+    <div id="logo-doctor">
+        <img src="https://res.cloudinary.com/dcbzfldni/image/upload/v1615282779/MyTherapy/nuage-bleu_n59iee.png" alt="Blue cloud">
+        <h1>My Therapy</h1>
+    </div>
+    <a href="/auth/doctor/signout">Log out</a>
+</nav>
+
 <section id="all-for-doctor">
-    <section id="left-doctor-bar">
-        <h2>My Patients:</h2>
+    <section id="doctor-left-bar">
+        <img src="{{doctorInfo.photo}}" alt="{{doctorInfo.name}} {{doctorInfo.lastname}} picture">
+        <h2>{{doctorInfo.name}} {{doctorInfo.lastname}}</h2>
+        <hr>
+        <h3>My Patients:</h3>
         <ul>
             {{#each doctorInfo.myPatients}}
             <li>
-                {{this.name}} {{this.lastname}}
+               <a href="/doctor/dashboard/{{this._id}}">{{this.name}} {{this.lastname}}</a> 
             </li>
             {{/each}}
         </ul>
+        <a href="/"><i class="fas fa-plus"></i>Add new patient</a>
     </section>
-    <section id="doc-header-bar">
-        <img src="{{doctorInfo.photo}}" alt="{{doctorInfo.name}} {{doctorInfo.lastname}} picture">
-        <h5>{{doctorInfo.name}} {{doctorInfo.lastname}}</h5>
-    </section>
-    <section id="main"> 
-        {{!-- for each quand clique sur un patient --}}
-        <div>
-            <div id="agenda"></div>
-        <button id="add-doc">
-            <i class="fas fa-plus"></i>
-        </button>
+    <section id="doctor-right-bar">
+        <div id="doctor-main"> 
+            Waiting for a patient... 
         </div>
-        {{!-- fin du each --}}
     </section>
 </section>
 
