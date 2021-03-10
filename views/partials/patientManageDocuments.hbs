@@ -1,0 +1,43 @@
+<div class="big-container manage-patients-wrapper">
+  <h3 class="manage-patients-title">Your latest documents</h3>
+  <table class="patients-manage-table">
+    <thead>
+      <tr class="table-row">
+        <th class="table-head-patient">Date</th>
+        <th class="table-head-patient">Title</th>
+        <th class="table-head-patient">Edit</th>
+        <th class="table-head-patient">Delete</th>
+   
+      </tr>
+    </thead>
+
+<tbody>
+      {{#each patients}}
+      <tr class="table-row">
+      
+<td class="table-division">
+  <div>{{this.date}}</div>
+</td>
+
+<td class="table-division">
+  <div>{{this.title}}</div>
+</td>
+<td class="table-division">
+  <a href="/doc-edit/{{this._id}}"><i class="fa fa-edit table-icon"></i></a>
+</td>
+<td class="table-division">
+  <a href="/doc-delete/{{this._id}}"><i class="fa fa-trash table-icon"></i></a>
+</td>
+
+      </tr>
+      {{/each}}
+      {{#unless patients}}
+      <tr>
+        <td colspan="6">Sorry no document yet
+
+        </td>
+      </tr>
+      {{/unless}}
+    </tbody> 
+  </table>
+</div>

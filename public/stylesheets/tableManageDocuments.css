@@ -38,6 +38,15 @@
     font-weight: 600;
     background-color: #b1d4f1d8;
   }
+
+  .table-head-patient {
+    width: 25%;
+    /* border: 1px solid; */
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    background-color:#F4CD99;
+  }
   
   .table-icon:hover {
     cursor: pointer;
