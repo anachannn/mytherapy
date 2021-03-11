@@ -1,3 +1,16 @@
+/*Create document*/
+
+.input-text{
+    border:none;
+    height: 300px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: rgb(247, 241, 241);
+    color: gray;
+    padding:20px;
+    width: calc(80vh - (40px));
+}
+
 /* Dashboard patient*/
 #add-doc{
     background-color: #F4CD99;
@@ -51,6 +64,7 @@
     align-items: center;
     padding-top: 100px;
     height: calc(100vh - (84px));
+
 }
 
 .form {

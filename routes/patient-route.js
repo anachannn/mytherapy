@@ -176,6 +176,20 @@ router.post("/add-document/:type", (req, res, next) => {
 /* UPDATE ENTRY/DOCUMENT */
 router.get("/edit-document/:type/:id", (req, res, next) => {
   if (req.params.type === "text") {
+//     TextModel.findById(req.params.id)
+//     .then(dbRes => {
+//     res.render("documents/editTextDocument", {text:dbRes})
+//   })
+//   .catch(error => next(error))
+//   } else if (req.params.type === "loop"){
+//     LoopModel.findById(req.params.id)
+//     .then(dbRes => {
+//       console.log(dbRes)
+//     res.render("documents/editLoopDocument", {loop:dbRes})
+//   })
+//   .catch(error => next(error))
+// }
+// })
     TextModel.findByIdAndUpdate(req.params.id)
     .then(textToUpdate => res.render("documents/editTextDocument", {text: textToUpdate, title: "MyTherapy | Update text document"}))
     .catch(next);
