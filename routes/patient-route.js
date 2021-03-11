@@ -87,6 +87,20 @@ router.get("/delete/:id", (req, res, next) => {
   PatientModel.findById(req.params.id)
   .then(dbRes => {
     console.log("dbRes: ", dbRes);
+    if (dbRes.myTexts.length > 0) {
+      dbRes.myTexts.forEach(item => {
+        TextModel.findByIdAndDelete(item)
+        .then(console.log("Text document deleted"))
+        .catch(next);
+      });
+    }
+    if (dbRes.myLoops.length > 0) {
+      dbRes.myLoops.forEach(item => {
+        LoopModel.findByIdAndDelete(item)
+        .then(console.log("Loop document deleted"))
+        .catch(next);
+      });
+    }
     DoctorModel.findByIdAndUpdate(dbRes.myTherapist._id, { $pull: {myPatients: dbRes._id} })
     .then(() => {
       PatientModel.findByIdAndDelete(req.params.id)
@@ -102,15 +116,15 @@ router.get("/delete/:id", (req, res, next) => {
 /* --------------- DOCUMENTS --------------- */
 /* CREATE NEW ENTRY/DOCUMENT */
 router.get("/add-doc", (req, res, next) => {
-  res.render("documents/createDocument")
+  res.render("documents/createDocument", {title: "MyTherapy | Create document"})
 });
 
 router.get("/create-text", (req, res, next) => {
-  res.render("documents/createTextDocument")
+  res.render("documents/createTextDocument", {title: "MyTherapy | Create a new text document"})
 });
 
 router.get("/create-loop", (req, res, next) => {
-  res.render("documents/createLoopDocument")
+  res.render("documents/createLoopDocument", {title: "MyTherapy | Create a new loop document"})
 });
 
 router.post("/add-document/:type", (req, res, next) => {

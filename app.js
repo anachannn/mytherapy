@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 100000000000 }, // in millisec
+    cookie: { maxAge: 100000000000 }, // in millisec   1 hour = 3600000 ms
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI
     }),
