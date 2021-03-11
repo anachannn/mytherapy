@@ -44,7 +44,8 @@ const patientSchema = new Schema({
     },
     myTherapist: {
         type: Schema.Types.ObjectId,
-        ref: 'doctors'
+        ref: 'doctors',
+        required: true
     },
     myTherapy: {
         type: String,

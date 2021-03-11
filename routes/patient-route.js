@@ -42,6 +42,7 @@ router.get('/edit-profile/:id', (req, res, next) => {
 });
 
 router.post('/edit-profile/:id', (req, res, next) => {
+  console.log(req.params.id);
   PatientModel.findById(req.params.id)
   .then(editRes => {
     newDoctor = req.body.myTherapist;
