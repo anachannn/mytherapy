@@ -1,4 +1,6 @@
 const patientsAPI = new APIHandler('https://my-therapy-app.herokuapp.com/doctor/api');
+// const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR LOCAL TESTS
+
 let containerInfo = document.getElementById("doctor-main");
 
 document.querySelectorAll('.select-one').forEach(selected => {
