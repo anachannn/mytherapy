@@ -55,7 +55,7 @@ router.get('/delete/:id', (req, res, next) => {
       })
       .catch(next);
     } else {
-      res.render({errorMessage: "Don't delete your profile without telling your patients to find another doctor, please!"};)
+      res.render({errorMessage: "Don't delete your profile without telling your patients to find another doctor, please!"});
       res.redirect("/doctor/dashboard");
     }
   })
