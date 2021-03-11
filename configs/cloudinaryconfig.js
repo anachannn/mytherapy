@@ -17,6 +17,6 @@ const storage = new CloudinaryStorage({
     cb(null, file.originalname); // The file on cloudinary would have the same name as the original file name
   }
 });
-const uploader = multer({ storage});
+const uploader = multer({ storage: storage });
 // a middleware designed to parse file from requests and associate to req.file
 module.exports = uploader;

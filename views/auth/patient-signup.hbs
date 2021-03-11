@@ -7,7 +7,7 @@
 
 <div class="form-container">
 
-    <form method="post" action="/auth/patient/signup" class="form">
+    <form method="post" action="/auth/patient/signup" class="form" enctype="multipart/form-data">
 
         <label for="name">Name</label>
         <input class="input" type="text" id="name" name="name" value="test name">
@@ -37,6 +37,9 @@
         
         <label for="myGoals">Your goal</label>
         <input type="text" name="myGoals" id="myGoals">
+
+        <label for="photo">Profile picture</label>
+        <input id="patient-img" type="file" class="input" name="photo">
 
         <button class="btn-patient">Sign up</button>
 
