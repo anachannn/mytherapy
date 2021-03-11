@@ -213,6 +213,7 @@ router.get("/edit-document/:type/:id", (req, res, next) => {
 router.post("/edit-document/:type/:id", (req, res, next) => {
   console.log("req.params: ", req.params);
   if(req.params.type === "text") {
+    console.log(req.body);
     const { date, title, text } = req.body;
     TextModel.findByIdAndUpdate(req.params.id, { date, title, text })
     .then(dbRes => {
