@@ -19,7 +19,7 @@ router.get("/dashboard", (req, res, next) => {
   PatientModel.findById(req.session.currentUser._id)
     .populate("myTherapist myTexts myLoops")
     .then(dbRes => {
-      res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard", script: "/scripts/patient.js" });
+      res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard" });
     })
     .catch(next);
 });
@@ -112,15 +112,15 @@ router.get("/delete/:id", (req, res, next) => {
 /* --------------- DOCUMENTS --------------- */
 /* CREATE NEW ENTRY/DOCUMENT */
 router.get("/add-doc", (req, res, next) => {
-  res.render("documents/createDocument", {title: "MyTherapy | Create document"})
+  res.render("documents/createDocument", {title: "MyTherapy | Create document", script: "/scripts/patient.js"})
 });
 
 router.get("/create-text", (req, res, next) => {
-  res.render("documents/createTextDocument", {title: "MyTherapy | Create a new text document"})
+  res.render("documents/createTextDocument", {title: "MyTherapy | Create a new text document", script: "/scripts/patient.js"})
 });
 
 router.get("/create-loop", (req, res, next) => {
-  res.render("documents/createLoopDocument", {title: "MyTherapy | Create a new loop document"})
+  res.render("documents/createLoopDocument", {title: "MyTherapy | Create a new loop document", script: "/scripts/patient.js"})
 });
 
 router.post("/add-document/:type", (req, res, next) => {
