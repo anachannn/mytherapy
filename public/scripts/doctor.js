@@ -3,6 +3,7 @@ const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR 
 
 let containerInfo = document.getElementById("doctor-main");
 const body = document.querySelector("#body");
+let containerTab = document.querySelector(".doctor-manage-table")
     
 
 document.querySelectorAll('.select-one').forEach(selected => {
@@ -28,7 +29,8 @@ document.querySelectorAll('.select-one').forEach(selected => {
 
 function printPatient(patient){
     
-    containerInfo.innerHTML = `<h2 class="title-page-doctor">About your patient :</h2>
+    containerInfo.innerHTML = `<div class="doctor-patient-info">
+    <h2 class="title-page-doctor">About your patient :</h2>
     <img class="img-patient" src="${patient.photo}" alt="patient-profile-picture">
     <p>Name : ${patient.name}</p>
     <p>Lastname : ${patient.lastname}</p>
@@ -40,7 +42,9 @@ function printPatient(patient){
     <h3>Medical reccord</h3>
     <p>Therapy : ${patient.MyTherapy}</p>
     <p>Goal(s): ${patient.myGoals}</p>
+    </div>
     `
+    containerTab.style.display = "block";
 }
 
 {/* <h3>Location</h3>
@@ -54,9 +58,6 @@ function printDocuments(documentList){
     documentList.forEach(text => {
         
         body.innerHTML += `<tbody id="body">
-        <tr class="table-row">
-        <td colspan="5">Texts</td>
-        </tr>
         <tr class="table-row">
         <td class="table-division">
         <div>${text.docType}</div>
@@ -75,8 +76,6 @@ function printDocuments(documentList){
         </td>
         
         </tr>
-       
-
         `
     });
 }
