@@ -5,15 +5,11 @@ require("./helpers/hbs");
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const hbs = require('hbs');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require("connect-mongo").default;
 const logger = require('morgan');
 const flash = require('connect-flash');
-
-// app.use(logger("dev"));
 
 const app = express();
 
@@ -25,7 +21,6 @@ hbs.registerPartials(path.join(__dirname, "views/partials"));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //session set up

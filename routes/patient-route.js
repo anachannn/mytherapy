@@ -1,5 +1,6 @@
 require('./../configs/dbconfig');
 require('./../configs/cloudinaryconfig');
+const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 const PatientModel = require('./../models/patient.model');
@@ -7,7 +8,6 @@ const DoctorModel = require('./../models/doctor.model');
 const TextModel = require('./../models/text.model');
 const LoopModel = require('./../models/loop.model');
 let currentDoctor, newDoctor;
-const moment = require("moment"); // usefull to format date
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
@@ -124,13 +124,11 @@ router.get("/create-loop", (req, res, next) => {
 });
 
 router.post("/add-document/:type", (req, res, next) => {
-  console.log(req.params);
   const patientId = req.session.currentUser._id;
-  console.log(patientId);
   if(req.params.type === "text") {
     const { date, title, text } = req.body;
-    moment(date).format("YYYY-MM-DD");
-
+    moment(date).toDate();
+    console.log(date);
     TextModel.create({ patientId, date, title, text })
     .then(dbRes => {
       PatientModel.findByIdAndUpdate(patientId, { $push: {myTexts: dbRes._id} })
@@ -156,8 +154,7 @@ router.post("/add-document/:type", (req, res, next) => {
         whatTwoYears,
         alternativeThoughts
       } = req.body;
-    
-      moment(date).format("YYYY-MM-DD");
+          
       LoopModel.create({
         patientId,
         date,

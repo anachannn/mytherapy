@@ -1,4 +1,7 @@
 const Handlebars = require("hbs");
+const moment = require("moment"); // usefull to format date
+
+Handlebars.registerHelper("date", (date) => moment(date).toDate());
 
 Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 

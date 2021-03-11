@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Handlebars = require("hbs");
+const moment = require("moment"); // usefull to format date
+
+Handlebars.registerHelper("date", (date) => moment(date).format("YYYY-MM-DD"));
 
 const loopSchema = new Schema({
     patientId:{
