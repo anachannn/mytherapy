@@ -173,7 +173,8 @@ footer{
 
 #therapist p{
   font-size: 1.2em;
-  font-weight: 500;
+  font-weight: 550;
+  width: 200px;
 }
 
 /* PATIENT: RIGHT BAR */
@@ -369,6 +370,7 @@ footer{
 
 #doctor-left-bar ul{
   margin-left: 20px;
+  line-height: 2em;
 }
 
 #doctor-right-bar{

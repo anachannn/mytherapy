@@ -41,7 +41,7 @@ router.get('/edit-profile/:id', (req, res, next) => {
   .catch(next);  
 });
 
-router.post('/edit-profile/:id', (req, res, next) => {
+router.post('/edit-profile/:id', /*uploader.single("photo"),*/ (req, res, next) => {
   PatientModel.findById(req.params.id)
   .then(editRes => {
     newDoctor = req.body.myTherapist;
