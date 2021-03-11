@@ -182,16 +182,18 @@ router.get("/edit-document/:type/:id", (req, res, next) => {
   }
   else if (req.params.type === "loop") {
     LoopModel.findByIdAndUpdate(req.params.id)
-    .then(loopToUpdate => res.render("documents/editLoopDocument"), {loop: loopToUpdate, title: "MyTherapy | Update loop document"})
+    .then(loopToUpdate => res.render("documents/editLoopDocument", {loop: loopToUpdate, title: "MyTherapy | Update loop document"}))
     .catch(next);
   }
 });
 
-router.post("/edit-document/:type", (req, res, next) => {
+router.post("/edit-document/:type/:id", (req, res, next) => {
+  console.log("req.params: ", req.params);
   if(req.params.type === "text") {
     const { date, title, text } = req.body;
-    TextModel.findByIdAndCreate(req.params.id, { date, title, text })
+    TextModel.findByIdAndUpdate(req.params.id, { date, title, text })
     .then(dbRes => {
+      console.log(dbRes);
       console.log("Document updated!");
       res.redirect("/patient/dashboard");
     })
