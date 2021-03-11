@@ -1,22 +1,22 @@
 <h2>Your profile:</h2>
-<form method="post" action="/doctor/signup" class="form">
+<form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form">
 
-    <img src="{{doctors.photo}}" alt="Profile picture">
+    <img src="{{doctorInfo.photo}}" alt="Profile picture">
 
     <label for="name">Name</label>
-    <input class="input" type="text" id="name" name="name" value="{{doctors.name}}">
+    <input class="input" type="text" id="name" name="name" value="{{doctorInfo.name}}">
 
     <label for="lastname">Lastname</label>
-    <input class="input" type="text" id="lastname" name="lastname" value="{{doctors.lastname}}">
+    <input class="input" type="text" id="lastname" name="lastname" value="{{doctorInfo.lastname}}">
     
     <label for="email">Your Email</label>
-    <input class="input" type="email" id="email" name="email" value="{{doctors.email}}">
+    <input class="input" type="email" id="email" name="email" value="{{doctorInfo.email}}">
     
     <label for="password">Your password</label>
-    <input class="input" type="password" id="password" name="password" value="{{doctors.password}}">
+    <input class="input" type="password" id="password" name="password" value="{{doctorInfo.password}}">
 
     <label for="myspecialty">Your specialty</label>
-    <input type="text" id="myspecialty" name="myspecialty" value="{{doctors.myspecialty}}" >
+    <input type="text" id="myspecialty" name="myspecialty" value="{{doctorInfo.myspecialty}}" >
 
     <button class="btn">Save changes</button>
 
