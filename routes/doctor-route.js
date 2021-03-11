@@ -55,7 +55,7 @@ router.get('/delete/:id', (req, res, next) => {
       })
       .catch(next);
     } else {
-      res.redirect("/doctor/dashboard", { errorMessage: "You cannot delete a doctor if he has patients"});
+      res.redirect("/doctor/dashboard");
     }
   })
 })
