@@ -7,19 +7,22 @@
 <h1 class="title-page-doctor">Hello Doctor,</h1>
 
 <div class="form-container">
-    
-<form method="post" action="/auth/doctor/signin" class="form">
-    
+    <form method="post" action="/auth/doctor/signin" class="form">
+        
 
-    <label for="email">Your Email</label>
-    <input class="input" type="email" id="email" name="email" value="test@email.com">
-    
-    <label for="password">Your password</label>
-    <input class="input" type="password" id="password" name="password" value="12345">
-    
-    <button class="btn-doctor">Sign in</button>
-</form>
-<p class="sign-up-link">
-    Don't have an account yet ? <a href="/auth/doctor/signup">Sign up</a>
-</p>
+        <label for="email">Your Email</label>
+        <input class="input" type="email" id="email" name="email" value="test@email.com">
+        
+        <label for="password">Your password</label>
+        <input class="input" type="password" id="password" name="password" value="12345">
+        
+        <button class="btn-doctor">Sign in</button>
+    </form>
+    {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+    {{/if}}
+    {{> flashMessage }}
+    <p class="sign-up-link">
+        Don't have an account yet ? <a href="/auth/doctor/signup">Sign up</a>
+    </p>
 </div>

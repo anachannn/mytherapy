@@ -41,9 +41,9 @@
         <button class="btn-patient">Sign up</button>
 
         {{#if errorMessage}}
-        <p class="error">{{errorMessage}}</p>
+            <p class="error">{{errorMessage}}</p>
         {{/if}}
-        
+        {{> flashMessage }}
     </form>
 
 

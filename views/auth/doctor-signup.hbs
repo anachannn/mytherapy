@@ -30,9 +30,9 @@
     <button class="btn-doctor">Sign up</button>
 
     {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
+        <p class="error">{{errorMessage}}</p>
     {{/if}}
-    
+    {{> flashMessage }}
 </form>
 <p class="sign-up-link">
     Already got an account ? <a href="/auth/doctor/signin">Sign in</a>

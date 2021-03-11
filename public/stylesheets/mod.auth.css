@@ -108,7 +108,7 @@
     padding: 15px 60px;
     background-color: #F4CD99;
     color: white;
-    border:none;
+    border:2px solid white;
 }
 
 .btn-patient a {
@@ -139,7 +139,7 @@
     padding-right: 90px;
     background-color: #B1D4F1;
     color: white;
-    border:none;
+    border:2px solid white;
 }
 
 .btn-doctor:hover{
