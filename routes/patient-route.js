@@ -181,7 +181,7 @@ router.post("/add-document/:type", (req, res, next) => {
   }
   // SEND NOTIFICATION TO DOCTOR
 });
-
+/*READ DOCUMENT*/
 router.get("/read-document/:type/:id", (req, res, next) => {
   if (req.params.type === "text") {
     TextModel.findById(req.params.id)

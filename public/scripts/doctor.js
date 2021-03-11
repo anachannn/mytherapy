@@ -71,7 +71,7 @@ function printDocuments(documentList){
         </td>
 
         <td class="table-division">
-        <a href="/patient/read-document/{{this.docType}}/{{this._id}}"><i class="fas fa-eye table-icon"></i></a>
+        <a href="/doctor/read-document/${text.docType}/${text._id}"><i class="fas fa-eye table-icon"></i></a>
         </td>
         
         </tr>

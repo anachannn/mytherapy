@@ -33,6 +33,23 @@ router.get("/api/patient/:id", (req, res, next) => {
    .catch(next);
 })
 
+/*READ PATIENT DOCUMENTS*/
+
+
+  router.get("/read-document/:type/:id", (req, res, next) => {
+    if (req.params.type === "text") {
+      TextModel.findById(req.params.id)
+      .then(textToRead => res.render("documents/doctorReadText", {text: textToRead, title: "MyTherapy | Read this document"}))
+      .catch(next);
+    }
+    else if (req.params.type === "loop") {
+      LoopModel.findById(req.params.id)
+      .then(loopToRead => res.render("documents/doctorReadLoop", {loop: loopToRead, title: "MyTherapy | Read this document"}))
+      .catch(next);
+    }
+  });
+
+
 /* CREATE NEW PATIENT */
 router.get('add-patient', (req, res, next) => {
   res.render("createPatient");
