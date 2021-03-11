@@ -83,13 +83,18 @@ a {
   color: black;
 }
 
+.warning, .error{
+  color: red;
+}
+
 footer{
-  background-color: #795930;
+  background-color: #9b3e00;
   color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px 50px;
+  height: 45px;
 }
 
 /* PATIENT DASHBOARD */
@@ -140,7 +145,7 @@ footer{
 /* PATIENT: LEFT BAR */
 
 #left-bar{
-  height: 100vh;
+  height: calc(100vh - 88px - 37px);
   width: 15%;
   background-color: rgb(244, 205, 153, .5);
   margin-top: 80px;
@@ -163,6 +168,7 @@ footer{
   font-size: 1.5em;
   font-weight: 700;
   margin: 20px 0;
+  padding-right: 10px;
 }
 
 #therapist p{
@@ -331,7 +337,7 @@ footer{
 /* DOCTOR: LEFT BAR */
 
 #doctor-left-bar{
-  height: 83vh;
+  height: calc(100vh - 88px - 37px);
   width: 15%;
   background-color: rgb(177, 212, 241, .5);
   padding-left: 20px;
@@ -359,6 +365,10 @@ footer{
   font-size: 1.3em;
   font-weight: 500;
   margin: 10px 0;
+}
+
+#doctor-left-bar ul{
+  margin-left: 20px;
 }
 
 #doctor-right-bar{
