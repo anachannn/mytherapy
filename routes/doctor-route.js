@@ -6,6 +6,7 @@ const PatientModel = require('./../models/patient.model');
 const DoctorModel = require('./../models/doctor.model');
 const TextModel = require('./../models/text.model');
 const LoopModel = require('./../models/loop.model');
+//const axios = require('axios');
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
@@ -19,6 +20,18 @@ router.get('/dashboard', (req, res, next) => {
   .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes, title: "MyTherapy | Doctor dashboard" }))
   .catch(next);
 });
+
+/*CLICK ON PATIENT TO DISPLAY THEIR DOCS*/
+
+router.get("/api/patient/:id", (req, res, next) => {
+  
+  PatientModel.findById(req.params.id)
+    .populate('myTexts myLoops')
+   .then(dbRes => {
+     res.send(dbRes)
+   })
+   .catch(next);
+})
 
 /* CREATE NEW PATIENT */
 router.get('add-patient', (req, res, next) => {
