@@ -185,6 +185,20 @@ router.post("/add-document/:type", (req, res, next) => {
   // SEND NOTIFICATION TO DOCTOR
 });
 
+router.get("/read-document/:type/:id", (req, res, next) => {
+  if (req.params.type === "text") {
+    TextModel.findById(req.params.id)
+    .then(textToRead => res.render("documents/readTextDocument", {text: textToRead, title: "MyTherapy | Read your text document"}))
+    .catch(next);
+  }
+  else if (req.params.type === "loop") {
+    LoopModel.findById(req.params.id)
+    .then(loopToRead => res.render("documents/readLoopDocument", {loop: loopToRead, title: "MyTherapy | Read your loop document"}))
+    .catch(next);
+  }
+});
+
+
 /* UPDATE ENTRY/DOCUMENT */
 router.get("/edit-document/:type/:id", (req, res, next) => {
   if (req.params.type === "text") {

@@ -1,13 +1,13 @@
 
 <h3 class="title-page">Edit your text document </h3>
 <div class="form-container">
-<form  class="form" method="post" action="/patient/edit-document/text/{{text._id}}">
+<form  class="form" method="post" action="/patient/edit-document/loop/{{text._id}}">
   
         <label for="date">Date of the event</label>
         <input class="input" type="date" name="date" value="{{text.date}}">
    
         <label  for="title">Title</label>
-        <text-area><input class="input" type="title" name="title" placeholder="Write your text here" value="{{text.title}}"></text-area>
+        <textarea class="input" type="title" name="title" placeholder="Write your text here" value="{{text.title}}"></textarea>
    
         <label  for="text">Your text</label>
         <textarea class="input-text" name="text" rows="20" cols="33">{{text.text}}
