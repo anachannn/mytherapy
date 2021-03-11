@@ -19,7 +19,7 @@ router.get("/dashboard", (req, res, next) => {
   PatientModel.findById(req.session.currentUser._id)
     .populate("myTherapist myTexts myLoops")
     .then(dbRes => {
-      res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard" });
+      res.render("dashboardPatient", { patientInfo: dbRes, title: "MyTherapy | Patient dashboard", script: "/scripts/patient.js" });
     })
     .catch(next);
 });
