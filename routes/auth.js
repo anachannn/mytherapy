@@ -47,12 +47,19 @@ router.get("/patient/signin", (req, res, next) => {
 router.post("/patient/signin", async (req, res, next) => {
     
     const { email, password } = req.body;
+    const onePatient = { ...req.body }; 
+
+    if(!onePatient.email || !onePatient.password){
+      res.render('auth/patient-signin', { errorMessage : 'You have to fill the two elements to log in bitch!'});
+      return;
+    };
+
     const foundPatient = await PatientModel.findOne({ email: email });
   
     if (!foundPatient) {
 
       req.flash("error", "Invalid credentials");
-      res.redirect("/patient/signin");
+      res.redirect("signin");
 
     } else {
 
@@ -61,7 +68,7 @@ router.post("/patient/signin", async (req, res, next) => {
       if (!isSamePassword) {
         
         req.flash("error", "Invalid credentials");
-        res.redirect("/patient/signin");
+        res.redirect("signin");
 
       } else {
      
@@ -88,16 +95,17 @@ router.post("/patient/signin", async (req, res, next) => {
       //   return;
       // }
 
-        if(!newPatient.name || !newPatient.lastname || !newPatient.email  || !newPatient.password){
-            res.render('auth/patient-signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
-            return;
-        };
+      if(!newPatient.name || !newPatient.lastname || !newPatient.email  || !newPatient.password){
+        const doctorsList = await DoctorModel.find();
+        res.render('auth/patient-signup', { doctorsList, title: "MyTherapy | Sign up", errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
+        return;
+      };
 
       const foundPatient = await PatientModel.findOne({ email: newPatient.email });
   
       if (foundPatient) {
         req.flash("warning", "Email already registered");
-        res.redirect("/patient/signup");
+        res.redirect("signup");
 
       } else {
 
@@ -141,12 +149,19 @@ router.post("/patient/signin", async (req, res, next) => {
 router.post("/doctor/signin", async (req, res, next) => {
    
     const { email, password } = req.body;
+    const oneDoctor = {...req.body}
+
+    if(!oneDoctor.email || !oneDoctor.password){
+      res.render('auth/doctor-signin', {errorMessage : 'You have to fill the two elements to log in bitch!'});
+      return;
+    };
+
     const foundDoctor = await DoctorModel.findOne({ email: email });
   
     if (!foundDoctor) {
      
       req.flash("error", "Invalid credentials");
-      res.redirect("/doctor/signin");
+      res.redirect("signin");
 
     } else {
 
@@ -154,7 +169,7 @@ router.post("/doctor/signin", async (req, res, next) => {
       if (!isSamePassword) {
        
         req.flash("error", "Invalid credentials");
-        res.redirect("/doctor/signin");
+        res.redirect("signin");
 
     } else {
      
@@ -184,14 +199,14 @@ router.post("/doctor/signin", async (req, res, next) => {
       if(!newDoctor.name || !newDoctor.lastname || !newDoctor.email  || !newDoctor.password){
         res.render('auth/doctor-signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});
         return;
-    };
+      };
 
       const foundDoctor = await DoctorModel.findOne({ email: newDoctor.email });
   
       if (foundDoctor) {
 
         req.flash("warning", "Email already registered");
-        res.redirect("/doctor/signup");
+        res.redirect("signup");
         
       } else {
 
