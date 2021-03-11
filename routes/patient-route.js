@@ -1,6 +1,5 @@
 require('./../configs/dbconfig');
 require('./../configs/cloudinaryconfig');
-const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 const PatientModel = require('./../models/patient.model');
@@ -79,6 +78,8 @@ router.post('/edit-profile/:id', /*uploader.single("photo"),*/ (req, res, next) 
   .catch(next);
 });
 
+
+/* DELETE PROFILE */
 router.get("/delete/:id", (req, res, next) => {
   PatientModel.findById(req.params.id)
   .then(dbRes => {
@@ -127,8 +128,6 @@ router.post("/add-document/:type", (req, res, next) => {
   const patientId = req.session.currentUser._id;
   if(req.params.type === "text") {
     const { date, title, text } = req.body;
-    moment(date).toDate();
-    console.log(date);
     TextModel.create({ patientId, date, title, text })
     .then(dbRes => {
       PatientModel.findByIdAndUpdate(patientId, { $push: {myTexts: dbRes._id} })

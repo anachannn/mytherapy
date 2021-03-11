@@ -21,6 +21,45 @@ router.get('/dashboard', (req, res, next) => {
   .catch(next);
 });
 
+/* UPDATE DOCTOR'S PROFILE */
+router.get('/edit-profile/:id', (req, res, next) => {
+  DoctorModel.findById(req.params.id)
+  .populate("myPatients")
+  .then(dbRes => {
+    console.log(dbRes);
+    res.render("editDoctorProfile", {doctorInfo: dbRes, title: "MyTherapy | Doctor - Edit your profile"});
+  })
+  .catch(next);
+});
+
+router.post('/edit-profile/:id', (req, res, next) => {
+  console.log("req.body: ", req.body);
+  DoctorModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(dbRes => {
+    console.log("Profile successfully edited! ", dbRes);
+    res.redirect("/doctor/dashboard");
+  })
+  .catch(next);
+});
+
+
+/* DELETE DOCTOR'S PROFILE */
+router.get('/delete/:id', (req, res, next) => {
+  DoctorModel.findById(req.params.id)
+  .then(foundDoctor => {
+    if (foundDoctor.myPatients.length === 0) {
+      DoctorModel.findByIdAndDelete(foundDoctor._id)
+      .then(() => {
+        console.log("Doctor successfully deleted");
+        res.redirect("/auth/doctor/signout");
+      })
+      .catch(next);
+    } else {
+      res.redirect("/doctor/dashboard", { errorMessage: "You cannot delete a doctor if he has patients"});
+    }
+  })
+})
+
 /*CLICK ON PATIENT TO DISPLAY THEIR DOCS*/
 
 router.get("/api/patient/:id", (req, res, next) => {

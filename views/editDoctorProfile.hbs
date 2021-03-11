@@ -1,3 +1,11 @@
+<nav id="doctor-nav">
+    <div id="logo-doctor">
+        <img src="https://res.cloudinary.com/dcbzfldni/image/upload/v1615282779/MyTherapy/nuage-bleu_n59iee.png" alt="Blue cloud">
+        <h1>My Therapy</h1>
+    </div>
+    <a href="/">Log out</a>
+</nav>
+
 <h2>Your profile:</h2>
 <form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form">
 
@@ -16,7 +24,7 @@
     <input class="input" type="password" id="password" name="password" value="{{doctorInfo.password}}">
 
     <label for="myspecialty">Your specialty</label>
-    <input type="text" id="myspecialty" name="myspecialty" value="{{doctorInfo.myspecialty}}" >
+    <input type="text" id="myspecialty" name="myspecialty" value="{{doctorInfo.mySpecialty}}" >
 
     <button class="btn">Save changes</button>
 
