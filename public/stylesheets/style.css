@@ -17,6 +17,11 @@ beige : #F4CD99
   margin: 0;
 }
 
+body{
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   color: #00B7FF;
   text-decoration: none;
@@ -26,15 +31,16 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 32px;
 }
 
 .background{
-  background-color: #f9f5f5;
   margin-bottom: 100px;
 }
 
 .img-first-page{
-  max-width: fit-content;
+  width: 450px;
+  height: 450px;
 }
 
 .btn-first-page{
@@ -129,13 +135,12 @@ footer{
   flex-wrap: wrap;
   flex-direction: row;
   align-content: flex-start;
-  height: 80vh;
 }
 
 /* PATIENT: LEFT BAR */
 
 #left-bar{
-  height: 100%;
+  height: 100vh;
   width: 15%;
   background-color: rgb(244, 205, 153, .5);
   margin-top: 80px;
@@ -321,13 +326,12 @@ footer{
   flex-wrap: wrap;
   flex-direction: row;
   align-content: flex-start;
-  height: 80vh;
 }
 
 /* DOCTOR: LEFT BAR */
 
 #doctor-left-bar{
-  height: 100%;
+  height: 83vh;
   width: 15%;
   background-color: rgb(177, 212, 241, .5);
   padding-left: 20px;

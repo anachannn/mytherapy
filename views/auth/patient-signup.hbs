@@ -1,48 +1,53 @@
+<nav id="nav-bar">
+    <a href="/">My therapy</a>
+    <a href="/about" id="about">About</a>
+</nav>
+
 <h1 class="title-page">How are you feeling today?</h1>
 
 <div class="form-container">
 
-<form method="post" action="/auth/patient/signup" class="form">
+    <form method="post" action="/auth/patient/signup" class="form">
 
-    <label for="name">Name</label>
-    <input class="input" type="text" id="name" name="name" value="test name">
+        <label for="name">Name</label>
+        <input class="input" type="text" id="name" name="name" value="test name">
 
-    <label for="lastname">Lastname</label>
-    <input class="input" type="text" id="lastname" name="lastname" value="test lastname">
-    
-    <label for="email">Your Email</label>
-    <input class="input" type="email" id="email" name="email" value="test@email.com">
-    
-    <label for="password">Your password</label>
-    <input class="input" type="password" id="password" name="password" value="12345">
-    
-    <label for="myTherapy">Your therapy</label>
-    <select class="select" name="myTherapy" id="myTherapy">
-        <option class="select-option" value="Cognitive-behavioral therapy (CBT)"selected>Cognitive-behavioral therapy (CBT)</option>
-        <option class="select-option" value="Psychoanalytic therapy">Psychoanalytic therapy</option>
-        <option class="select-option" value="Group therapy">Group therapy</option>
-    </select>
+        <label for="lastname">Lastname</label>
+        <input class="input" type="text" id="lastname" name="lastname" value="test lastname">
+        
+        <label for="email">Your Email</label>
+        <input class="input" type="email" id="email" name="email" value="test@email.com">
+        
+        <label for="password">Your password</label>
+        <input class="input" type="password" id="password" name="password" value="12345">
+        
+        <label for="myTherapy">Your therapy</label>
+        <select class="select" name="myTherapy" id="myTherapy">
+            <option class="select-option" value="Cognitive-behavioral therapy (CBT)"selected>Cognitive-behavioral therapy (CBT)</option>
+            <option class="select-option" value="Psychoanalytic therapy">Psychoanalytic therapy</option>
+            <option class="select-option" value="Group therapy">Group therapy</option>
+        </select>
 
-    <label for="myTherapist">Your therapist</label>
-    <select class="select" name="myTherapist" id="myTherapist">
-      {{#each doctorsList}}
-      <option class="select-option" value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
-      {{/each}}
-    </select>
-    
-    <label for="myGoals">Your goal</label>
-    <input type="text" name="myGoals" id="myGoals">
+        <label for="myTherapist">Your therapist</label>
+        <select class="select" name="myTherapist" id="myTherapist">
+        {{#each doctorsList}}
+        <option class="select-option" value="{{this._id}}">{{this.name}} {{this.lastname}}</option>
+        {{/each}}
+        </select>
+        
+        <label for="myGoals">Your goal</label>
+        <input type="text" name="myGoals" id="myGoals">
 
-    <button class="btn-patient">Sign up</button>
+        <button class="btn-patient">Sign up</button>
 
-    {{#if errorMessage}}
-    <p class="error">{{errorMessage}}</p>
-    {{/if}}
-    
-</form>
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{/if}}
+        
+    </form>
 
 
-<p class="sign-up-link">
-    Already got an account ? <a href="/auth/patient/signin">Sign in</a>
-</p>
+    <p class="sign-up-link">
+        Already got an account ? <a href="/auth/patient/signin">Sign in</a>
+    </p>
 </div>
