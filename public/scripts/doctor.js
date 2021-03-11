@@ -1,5 +1,5 @@
-const patientsAPI = new APIHandler('https://my-therapy-app.herokuapp.com/doctor/api');
-// const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR LOCAL TESTS
+//const patientsAPI = new APIHandler('https://my-therapy-app.herokuapp.com/doctor/api');
+const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR LOCAL TESTS
 
 let containerInfo = document.getElementById("doctor-main");
 
@@ -25,93 +25,54 @@ document.querySelectorAll('.select-one').forEach(selected => {
 
 function printPatient(patient){
     
-    containerInfo.innerHTML = `<p>${patient.name}</p>
-    <p>${patient.lastname}</p>
-    <p>${patient.email}</p>
-    <p>${patient.myTexts}</p>`
+    containerInfo.innerHTML = `<h2 class="title-page-doctor">About your patient :</h2>
+    <img class="img-patient" src="${patient.photo}" alt="patient-profile-picture">
+    <p>Name : ${patient.name}</p>
+    <p>Lastname : ${patient.lastname}</p>
+    <p>Email : ${patient.email}</p>
+    <p>Phone number : ${patient.phoneNumber}</p>
+    
+   
+    <p>Email : ${patient.email}</p>
+    <h3>Medical reccord</h3>
+    <p>Therapy : ${patient.MyTherapy}</p>
+    <p>Goal(s): ${patient.myGoals}</p>
+    `
 }
+
+{/* <h3>Location</h3>
+<p>Address : ${patient.location.adress}</p>
+<p>${patient.location.zipcode}${patient.location.city}</p> */}
 
 function printDocuments(documentList){
   
+const body = document.querySelector("#body");
     documentList.forEach(text => {
-        containerInfo.innerHTML += `<table class="doctor-manage-table">
-        <thead>
-          <tr class="table-row">
-            <th class="table-head-patient">Type</th>
-            <th class="table-head-patient">Date</th>
-            <th class="table-head-patient">Title</th>
-            <th class="table-head-patient">Read</th>
-      
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr class="table-row">
-            <td colspan="5">Texts</td>
-          </tr>
-
-
-         {{#each this}}
-<tr class="table-row">
-<td class="table-division">
-<div>${text.docType}</div>
-</td>
-
-<td class="table-division">
-<div>${text.date}</div>
-</td>
-
-<td class="table-division">
-<div>${text.title}</div>
-</td>
-<td class="table-division">
-<a href="/patient/read-document/{{this.docType}}/{{this._id}}"><i class="fas fa-eye table-icon"></i></a>
-</td>
-
-</tr>
-{{/each}}
-{{#unless this}}
-<tr>
-<td colspan="6">Sorry no document yet</td>
-</tr>
-{{/unless}}
-
-
-
-          <tr class="table-row">
-            <td colspan="5">Loops</td>
-          </tr>
-
-
-        {{#each this}}
-<tr class="table-row">
-<td class="table-division">
-<div>${loop.docType}</div>
-</td>
-
-<td class="table-division">
-<div>${loop.date}</div>
-</td>
-
-<td class="table-division">
-<div>${loop.title}</div>
-</td>
-<td class="table-division">
-<a href="/patient/read-document/{{this.docType}}/{{this._id}}"><i class="fas fa-eye table-icon"></i></a>
-</td>
-
-</tr>
-{{/each}}
-{{#unless this}}
-<tr>
-<td colspan="6">Sorry no document yet</td>
-</tr>
-{{/unless}}
-
-     
-        </tbody> 
-      </table>
+        body.innerHTML += `<tbody id="body">
+        <tr class="table-row">
+        <td colspan="5">Texts</td>
+        </tr><tr class="table-row">
+        <td class="table-division">
+        <div>${text.docType}</div>
+        </td>
         
+        <td class="table-division">
+        <div>${text.date}</div>
+        </td>
+        
+        <td class="table-division">
+        <div>${text.title}</div>
+        </td>
+
+        <td class="table-division">
+        <a href="/patient/read-document/{{this.docType}}/{{this._id}}"><i class="fas fa-eye table-icon"></i></a>
+        </td>
+        
+        </tr>
+        <tr class="table-row">
+        <td colspan="5">Loops</td>
+        </tr>
+
         `
     });
 }
