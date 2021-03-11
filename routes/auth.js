@@ -4,6 +4,7 @@ const PatientModel = require("./../models/patient.model");
 const DoctorModel = require("./../models/doctor.model")
 const bcrypt = require("bcryptjs");
 const mongoose = require('mongoose');
+const uploader = require("./../configs/cloudinaryconfig")
 
 //GET ROUTES
 
@@ -83,7 +84,7 @@ router.post("/patient/signin", async (req, res, next) => {
 
   // Patient - Sign up
   
-  router.post("/patient/signup", async (req, res, next) => {
+  router.post("/patient/signup", uploader.single("photo"), async (req, res, next) => {
     try {
       const newPatient = { ...req.body }; 
 
@@ -111,6 +112,10 @@ router.post("/patient/signin", async (req, res, next) => {
 
         const hashedPassword = bcrypt.hashSync(newPatient.password, 10);
         newPatient.password = hashedPassword;
+        if (!req.file) newPatient.photo = undefined;
+        else {
+            newPatient.photo = req.file.path
+        };
         PatientModel.create(newPatient)
         .then(dbRes => {
           DoctorModel.findByIdAndUpdate(dbRes.myTherapist, { $push: {myPatients: dbRes._id} })
@@ -185,7 +190,7 @@ router.post("/doctor/signin", async (req, res, next) => {
 
   // Doctor - Sign up
   
-  router.post("/doctor/signup", async (req, res, next) => {
+  router.post("/doctor/signup", uploader.single("photo"), async (req, res, next) => {
     try {
       const newDoctor = { ...req.body };
       // const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
@@ -212,6 +217,10 @@ router.post("/doctor/signin", async (req, res, next) => {
 
         const hashedPassword = bcrypt.hashSync(newDoctor.password, 10);
         newDoctor.password = hashedPassword;
+        if (!req.file) newDoctor.photo = undefined;
+        else {
+            newDoctor.photo = req.file.path
+        };
         await DoctorModel.create(newDoctor);
         req.flash("success", "Congrats ! You are now registered !");
         res.redirect("/auth/doctor/signin");

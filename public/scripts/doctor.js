@@ -2,6 +2,8 @@
 const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR LOCAL TESTS
 
 let containerInfo = document.getElementById("doctor-main");
+const body = document.querySelector("#body");
+    
 
 document.querySelectorAll('.select-one').forEach(selected => {
     selected.addEventListener('click', function (event) {
@@ -12,6 +14,7 @@ document.querySelectorAll('.select-one').forEach(selected => {
     patientsAPI.getPatientInfo(id)
         .then((apiRes) => {
           printPatient(apiRes.data)
+          body.innerHTML ="";  
           printDocuments(apiRes.data.myTexts)
           printDocuments(apiRes.data.myLoops)
         })
@@ -44,14 +47,17 @@ function printPatient(patient){
 <p>Address : ${patient.location.adress}</p>
 <p>${patient.location.zipcode}${patient.location.city}</p> */}
 
+
 function printDocuments(documentList){
   
-const body = document.querySelector("#body");
+  
     documentList.forEach(text => {
+        
         body.innerHTML += `<tbody id="body">
         <tr class="table-row">
         <td colspan="5">Texts</td>
-        </tr><tr class="table-row">
+        </tr>
+        <tr class="table-row">
         <td class="table-division">
         <div>${text.docType}</div>
         </td>
@@ -69,9 +75,7 @@ const body = document.querySelector("#body");
         </td>
         
         </tr>
-        <tr class="table-row">
-        <td colspan="5">Loops</td>
-        </tr>
+       
 
         `
     });
