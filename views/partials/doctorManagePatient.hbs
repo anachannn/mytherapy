@@ -1,44 +1,24 @@
-<div class="big-container manage-patients-wrapper">
-  <h3 class="manage-patients-title">Your patients latest documents</h3>
-  <table class="patients-manage-table">
-    <thead>
-      <tr class="table-row">
-        <th class="table-head">Date</th>
-        <th class="table-head">Name</th>
-        <th class="table-head">Title</th>
+{{#each this}}
+<tr class="table-row">
+  <td class="table-division">
+    <div>{{this.docType}}</div>
+  </td>
 
-        <th class="table-head">Read</th>
-   
-      </tr>
-    </thead>
+  <td class="table-division">
+    <div>{{this.date}}</div>
+  </td>
 
-<tbody>
-      {{#each patients}}
-      <tr class="table-row">
-      
-<td class="table-division">
-  <div>{{this.date}}</div>
-</td>
+  <td class="table-division">
+    <div>{{this.title}}</div>
+  </td>
+  <td class="table-division">
+    <a href="/patient/read-document/{{this.docType}}/{{this._id}}"><i class="fas fa-eye table-icon"></i></a>
+  </td>
 
-<td class="table-division">
-  <div>{{this.name}}</div>
-</td>
-<td class="table-division">
-  <div>{{this.title}}</div>
-</td>
-<td class="table-division">
-  <a href="/read-doc/{{this._id}}">Read this document</a>
-</td>
-
-      </tr>
-      {{/each}}
-      {{#unless patients}}
-      <tr>
-        <td colspan="6">Sorry no patient yet
-
-        </td>
-      </tr>
-      {{/unless}}
-    </tbody> 
-  </table>
-</div>
+</tr>
+{{/each}}
+{{#unless this}}
+<tr>
+  <td colspan="6">Sorry no document yet</td>
+</tr>
+{{/unless}}

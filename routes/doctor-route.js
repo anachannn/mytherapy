@@ -26,7 +26,7 @@ router.get('/dashboard', (req, res, next) => {
 router.get("/api/patient/:id", (req, res, next) => {
   
   PatientModel.findById(req.params.id)
-    .populate('myTexts myLoops')
+   .populate('myTexts myLoops')
    .then(dbRes => {
      res.send(dbRes)
    })
