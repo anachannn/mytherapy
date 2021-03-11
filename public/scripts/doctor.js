@@ -1,5 +1,5 @@
-const patientsAPI = new APIHandler('https://my-therapy-app.herokuapp.com/doctor/api');
-// const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR LOCAL TESTS
+//const patientsAPI = new APIHandler('https://my-therapy-app.herokuapp.com/doctor/api');
+const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR LOCAL TESTS
 
 let containerInfo = document.getElementById("doctor-main");
 const body = document.querySelector("#body");
@@ -29,6 +29,8 @@ document.querySelectorAll('.select-one').forEach(selected => {
 
 function printPatient(patient){
     
+
+
     containerInfo.innerHTML = `<div class="doctor-patient-info">
     <h2 class="title-page-doctor">About your patient :</h2>
     <img class="img-patient" src="${patient.photo}" alt="patient-profile-picture">
@@ -36,10 +38,12 @@ function printPatient(patient){
     <p>Lastname : ${patient.lastname}</p>
     <p>Email : ${patient.email}</p>
     <p>Phone number : ${patient.phoneNumber}</p>
-    
-   
-    <p>Email : ${patient.email}</p>
-    <h3>Medical reccord</h3>
+    <br>
+    <h3>Location</h3>
+    <p>Address : ${patient.location.address}</p>
+    <p>${patient.location.zipcode} ${patient.location.city}</p>
+    <br>
+    <h3>Medical record</h3>
     <p>Therapy : ${patient.MyTherapy}</p>
     <p>Goal(s): ${patient.myGoals}</p>
     </div>
@@ -47,9 +51,7 @@ function printPatient(patient){
     containerTab.style.display = "block";
 }
 
-{/* <h3>Location</h3>
-<p>Address : ${patient.location.adress}</p>
-<p>${patient.location.zipcode}${patient.location.city}</p> */}
+
 
 
 function printDocuments(documentList){

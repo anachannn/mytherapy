@@ -228,6 +228,46 @@ footer{
   color: #F4CD99;
 }
 
+#bttns-doctor{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  
+}
+
+.btn-doctor-profile{
+  text-decoration: none;
+  text-align: start;
+  margin:10px;
+  color: #4e8fc4;
+  transition: .2s;
+}
+
+.btn-doctor-profile a{
+color: white;
+}
+
+.btn-doctor-profile i{
+color: #4e8fc4;
+margin-right: 10px;
+}
+
+.btn-doctor-profile:hover{
+color:white;
+}
+
+.select-one:hover{
+  color: #4e8fc4;
+}
+
+.form img{
+  width: 7em;
+  height: 7em;
+  margin: 20px;
+  border-radius: 50%;
+  border: 7px solid white;
+}
+
 #account img{
   width: 7em;
   height: 7em;

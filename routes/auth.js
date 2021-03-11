@@ -4,7 +4,7 @@ const PatientModel = require("./../models/patient.model");
 const DoctorModel = require("./../models/doctor.model")
 const bcrypt = require("bcryptjs");
 const mongoose = require('mongoose');
-const uploader = require("./../configs/cloudinaryconfig")
+const uploader = require("./../configs/cloudinaryconfig");
 
 //GET ROUTES
 
@@ -95,6 +95,7 @@ router.post("/patient/signin", async (req, res, next) => {
       //     .render('auth/patient-signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
       //   return;
       // }
+      
 
       if(!newPatient.name || !newPatient.lastname || !newPatient.email  || !newPatient.password){
         const doctorsList = await DoctorModel.find();
@@ -200,6 +201,8 @@ router.post("/doctor/signin", async (req, res, next) => {
       //     .render('auth/doctor-signup', { errorMessage: 'Password needs to have at least 6 characters and must contain at least one number, one lowercase and one uppercase letter.' });
       //   return;
       // }
+
+      console.log(req.file)
 
       if(!newDoctor.name || !newDoctor.lastname || !newDoctor.email  || !newDoctor.password){
         res.render('auth/doctor-signup', {errorMessage : 'Name, Lastname, Email and Password are mandatory. Please provide all of them.'});

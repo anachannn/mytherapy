@@ -17,7 +17,9 @@ router.get('/', (req, res, next) => {
 router.get('/dashboard', (req, res, next) => {
   DoctorModel.findById(req.session.currentUser._id)
   .populate("myPatients")
-  .then(dbRes => res.render("dashboardDoctor", { doctorInfo: dbRes, title: "MyTherapy | Doctor dashboard", script: "/scripts/doctor.js" }))
+  .then(dbRes => {
+    console.log(dbRes)
+    res.render("dashboardDoctor", { doctorInfo: dbRes, title: "MyTherapy | Doctor dashboard", script: "/scripts/doctor.js" })})
   .catch(next);
 });
 

@@ -6,7 +6,9 @@
     <a href="/">Log out</a>
 </nav>
 
-<h2>Your profile:</h2>
+<div class="form-container">
+
+<h2 class="title-page-doctor">Your profile</h2>
 <form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form">
 
     <img src="{{doctorInfo.photo}}" alt="Profile picture">
@@ -26,10 +28,12 @@
     <label for="myspecialty">Your specialty</label>
     <input type="text" id="myspecialty" name="myspecialty" value="{{doctorInfo.mySpecialty}}" >
 
-    <button class="btn">Save changes</button>
+    <button class="btn-doctor">Save changes</button>
 
     {{#if errorMessage}}
     <p class="error">{{errorMessage}}</p>
     {{/if}}
     
 </form>
+
+</div>

@@ -10,8 +10,12 @@
     <section id="doctor-left-bar">
         <img src="{{doctorInfo.photo}}" alt="{{doctorInfo.name}} {{doctorInfo.lastname}} picture">
         <h2>{{doctorInfo.name}} {{doctorInfo.lastname}}</h2>
+        <div id="bttns-doctor">
+            <a class="btn-doctor-profile" href="/doctor/edit-profile/{{doctorInfo._id}}"><i class="fas fa-user-edit"></i>Edit your profile</a>
+            <a class="btn-doctor-profile" href="/doctor/delete/{{doctorInfo._id}}"><i class="fas fa-user-times"></i>Delete your profile</a>
+        </div>
         <hr>
-        <h3>My Patients:</h3>
+        <h3>My Patients</h3>
         <ul>
             {{#each doctorInfo.myPatients}}
             <li>
@@ -20,8 +24,7 @@
             {{/each}}
         </ul>
 
-<a href="/doctor/edit-profile/{{doctorInfo._id}}">Edit profile</a>
-<a href="/doctor/delete/{{doctorInfo._id}}">Delete profile</a>
+
 
     </section>
     <section id="doctor-right-bar">
