@@ -26,7 +26,6 @@ router.get("/patient/signin", (req, res, next) => {
   });
 
 //Doctor
-
   router.get("/doctor/signin", (req, res, next) => {
     res.render("auth/doctor-signin", { title: "MyTherapy | Sign-in"});
   });
@@ -42,9 +41,7 @@ router.get("/patient/signin", (req, res, next) => {
   });
 
 //POST ROUTES
-
 //Patient - Sign in
-
 router.post("/patient/signin", async (req, res, next) => {
     
     const { email, password } = req.body;
@@ -60,7 +57,7 @@ router.post("/patient/signin", async (req, res, next) => {
     if (!foundPatient) {
 
       req.flash("error", "Invalid credentials");
-      res.redirect("signin");
+      res.redirect("/auth/patient/signin");
 
     } else {
 
@@ -69,7 +66,7 @@ router.post("/patient/signin", async (req, res, next) => {
       if (!isSamePassword) {
         
         req.flash("error", "Invalid credentials");
-        res.redirect("signin");
+        res.redirect("/auth/patient/signin");
 
       } else {
      
@@ -107,7 +104,7 @@ router.post("/patient/signin", async (req, res, next) => {
   
       if (foundPatient) {
         req.flash("warning", "Email already registered");
-        res.redirect("signup");
+        res.redirect("/auth/patient/signup");
 
       } else {
 
@@ -139,19 +136,10 @@ router.post("/patient/signin", async (req, res, next) => {
             next(error);
           }
       }
-    //   Je ne sais pas quoi faire de ça...
-    //   let errorMessage = "";
-    //   for (field in err.errors) {
-    //     errorMessage += err.errors[field].message + "\n";
-    //   }
-    //   req.flash("error", errorMessage);
-    //   res.redirect("/patient/signup");
-    // }
   });
 
+
 //Doctor - Sign in
-
-
 router.post("/doctor/signin", async (req, res, next) => {
    
     const { email, password } = req.body;
@@ -167,7 +155,7 @@ router.post("/doctor/signin", async (req, res, next) => {
     if (!foundDoctor) {
      
       req.flash("error", "Invalid credentials");
-      res.redirect("signin");
+      res.redirect("/auth/patient/signin");
 
     } else {
 
@@ -175,7 +163,7 @@ router.post("/doctor/signin", async (req, res, next) => {
       if (!isSamePassword) {
        
         req.flash("error", "Invalid credentials");
-        res.redirect("signin");
+        res.redirect("/auth/patient/signin");
 
     } else {
      
@@ -214,7 +202,7 @@ router.post("/doctor/signin", async (req, res, next) => {
       if (foundDoctor) {
 
         req.flash("warning", "Email already registered");
-        res.redirect("signup");
+        res.redirect("/auth/patient/signup");
         
       } else {
 
@@ -238,14 +226,6 @@ router.post("/doctor/signin", async (req, res, next) => {
           } else {
             next(error);
           }}
-    //   Je ne sais pas quoi faire de ça...
-    //   let errorMessage = "";
-    //   for (field in err.errors) {
-    //     errorMessage += err.errors[field].message + "\n";
-    //   }
-    //   req.flash("error", errorMessage);
-    //   res.redirect("/patient/signup");
-    // }
   });
 
 module.exports = router;

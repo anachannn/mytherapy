@@ -57,7 +57,8 @@ router.get('/delete/:id', (req, res, next) => {
       })
       .catch(next);
     } else {
-      res.redirect("/doctor/dashboard", { errorMessage: "You cannot delete a doctor if he has patients"});
+      req.flash("error", "Please don't delete your profile without telling your patients to switch to another doctor!");
+      res.redirect("/doctor/dashboard");
     }
   })
 })
