@@ -9,7 +9,7 @@
 <div class="form-container">
 
 <h2 class="title-page-doctor">Your profile</h2>
-<form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form">
+<form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form" enctype="multipart/form-data">
 
     <img src="{{doctorInfo.photo}}" alt="Profile picture">
 
@@ -22,11 +22,28 @@
     <label for="email">Your Email</label>
     <input class="input" type="email" id="email" name="email" value="{{doctorInfo.email}}">
     
+    <label for="phoneNumber">Phone number</label>
+    <input type="text" name="phoneNumber" value="{{doctorInfo.phoneNumber}}">
+ 
+
+    <label for="address">Address</label>
+    <input type="text" name="address" value="{{doctorInfo.location.address}}">
+
+    <label for="zipcode">Zip code</label>
+    <input type="text" name="zipcode" value="{{doctorInfo.location.zipcode}}">
+   
+    <label for="city">City</label>
+    <input type="text" name="city" value="{{doctorInfo.location.city}}">
+
     <label for="password">Your password</label>
     <input class="input" type="password" id="password" name="password" value="{{doctorInfo.password}}">
 
     <label for="myspecialty">Your specialty</label>
     <input type="text" id="myspecialty" name="myspecialty" value="{{doctorInfo.mySpecialty}}" >
+
+    <label for="photo">Profile picture</label>
+    <input id="doctor-img" type="file" class="input" name="photo" value="{{doctorInfo.photo}}">
+  
 
     <button class="btn-doctor">Save changes</button>
 

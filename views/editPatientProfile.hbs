@@ -2,7 +2,7 @@
 
 <div class="form-container">
 
-<form class="form" action="/patient/edit-profile/{{patientInfo._id}}" method="post">
+<form class="form" action="/patient/edit-profile/{{patientInfo._id}}" method="post" enctype="multipart/form-data">
 
 
 <img class="img-patient" src="{{patientInfo.photo}}" alt="Profile picture">
@@ -60,6 +60,9 @@
   
         <label for="myGoals">My goal</label>
         <input type="text" name="myGoals" value="{{patientInfo.myGoals}}">
+
+        <label for="photo">Profile picture</label>
+        <input id="patient-img" type="file" class="input" name="photo" value="{{patientInfo.photo}}">
   
 
 
