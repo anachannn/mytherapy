@@ -6,7 +6,7 @@ const PatientModel = require('./../models/patient.model');
 const DoctorModel = require('./../models/doctor.model');
 const TextModel = require('./../models/text.model');
 const LoopModel = require('./../models/loop.model');
-//const axios = require('axios');
+const uploader = require("./../configs/cloudinaryconfig");
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
@@ -34,9 +34,28 @@ router.get('/edit-profile/:id', (req, res, next) => {
   .catch(next);
 });
 
-router.post('/edit-profile/:id', (req, res, next) => {
+router.post('/edit-profile/:id', uploader.single("photo"), (req, res, next) => {
   console.log("req.body: ", req.body);
-  DoctorModel.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  const { name, lastname, email, phoneNumber, mySpecialty } = req.body;
+  let photo;
+  if (!req.file) photo = undefined;
+  else {
+      photo = req.file.path
+  };
+
+  DoctorModel.findByIdAndUpdate(req.params.id, {
+    name,
+    lastname,
+    email,
+    phoneNumber,
+    location: {
+      address: req.body.address,
+      zipcode: req.body.zipcode,
+      city: req.body.city
+    },
+    mySpecialty,
+    photo
+  }, {new: true})
   .then(dbRes => {
     console.log("Profile successfully edited! ", dbRes);
     res.redirect("/doctor/dashboard");
@@ -64,7 +83,6 @@ router.get('/delete/:id', (req, res, next) => {
 })
 
 /*CLICK ON PATIENT TO DISPLAY THEIR DOCS*/
-
 router.get("/api/patient/:id", (req, res, next) => {
   
   PatientModel.findById(req.params.id)
@@ -75,9 +93,7 @@ router.get("/api/patient/:id", (req, res, next) => {
    .catch(next);
 })
 
-/*READ PATIENT DOCUMENTS*/
-
-
+/* READ PATIENT DOCUMENTS */
   router.get("/read-document/:type/:id", (req, res, next) => {
     if (req.params.type === "text") {
       TextModel.findById(req.params.id)
@@ -90,21 +106,5 @@ router.get("/api/patient/:id", (req, res, next) => {
       .catch(next);
     }
   });
-
-
-/* CREATE NEW PATIENT */
-router.get('add-patient', (req, res, next) => {
-  res.render("createPatient");
-});
-
-router.post('add-patient', (req, res, next) => {
-  const { name, lastname, email, password } = req.body;
-  PatientModel.create({ name, lastname, email, password })
-  .then(dbRes => {
-    console.log("Patient successfully added!");
-    res.redirect('/doctor/dashboard');
-  })
-  .catch(next);
-});
 
 module.exports = router;
