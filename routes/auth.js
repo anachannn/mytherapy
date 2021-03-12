@@ -155,7 +155,7 @@ router.post("/doctor/signin", async (req, res, next) => {
     if (!foundDoctor) {
      
       req.flash("error", "Invalid credentials");
-      res.redirect("/auth/patient/signin");
+      res.redirect("/auth/doctor/signin");
 
     } else {
 
@@ -163,7 +163,7 @@ router.post("/doctor/signin", async (req, res, next) => {
       if (!isSamePassword) {
        
         req.flash("error", "Invalid credentials");
-        res.redirect("/auth/patient/signin");
+        res.redirect("/auth/doctor/signin");
 
     } else {
      
@@ -202,7 +202,7 @@ router.post("/doctor/signin", async (req, res, next) => {
       if (foundDoctor) {
 
         req.flash("warning", "Email already registered");
-        res.redirect("/auth/patient/signup");
+        res.redirect("/auth/doctor/signup");
         
       } else {
 
