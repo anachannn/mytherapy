@@ -15,9 +15,7 @@
 
 .doctor-manage-table{
   display:none;
-  margin: 20px;
-  margin-left: 70px;
-  
+  margin: 50px 20px 50px 60px;
 }
 
 .manage-patients-wrapper {
@@ -79,4 +77,8 @@ h3.manage-patients-title {
   padding: 1rem;
   text-align: center;
 }
-  
+
+.doctor-row, .doctor-division{
+  width: 200px;
+  text-align: center;
+}

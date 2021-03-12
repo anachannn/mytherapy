@@ -88,7 +88,7 @@ a {
 }
 
 footer{
-  background-color: #9b3e00;
+  background-color: rgb(155, 62, 0, .3);
   color: white;
   display: flex;
   flex-wrap: wrap;
@@ -145,7 +145,7 @@ footer{
 /* PATIENT: LEFT BAR */
 
 #left-bar{
-  height: calc(100vh - 88px - 37px);
+  min-height: calc(100vh - 88px - 37px);
   width: 15%;
   background-color: rgb(244, 205, 153, .5);
   margin-top: 80px;
@@ -378,7 +378,7 @@ color:white;
 /* DOCTOR: LEFT BAR */
 
 #doctor-left-bar{
-  height: calc(100vh - 88px - 37px);
+  min-height: calc(100vh - 88px - 37px);
   width: 15%;
   background-color: rgb(177, 212, 241, .5);
   padding-left: 20px;
@@ -419,4 +419,33 @@ color:white;
   justify-content: center;
   align-items: center;
   margin-top: 80px;
+}
+
+#about-section{
+  min-height: calc(100vh - 88px - 25px);
+}
+
+#about-section h1{
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(155, 62, 0, .3);
+  padding: 30px 0;
+}
+
+#about-img{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 0;
+  padding: 30px 0;
+}
+
+#about-img img{
+  border-radius: 20%;
+  border: 5px solid rgb(155, 62, 0, .3);
+}
+
+#about-section p{
+  margin: 30px 80px;
+  text-justify: auto;
 }

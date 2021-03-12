@@ -62,15 +62,15 @@ function printDocuments(documentList){
      
         body.innerHTML += `<tbody id="body">
         <tr class="table-row">
-        <td class="table-division">
+        <td class="table-division doctor-division">
         <div>${text.docType}</div>
         </td>
         
-        <td class="table-division">
+        <td class="table-division doctor-division">
         <div>${text.title}</div>
         </td>
 
-        <td class="table-division">
+        <td class="table-division doctor-division">
         <a href="/doctor/read-document/${text.docType}/${text._id}"><i class="fas fa-eye table-icon"></i></a>
         </td>
         
