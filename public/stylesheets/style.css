@@ -184,6 +184,7 @@ footer{
   display: flex;
   flex-direction: column;
   margin-top: 80px;
+  margin-bottom: 10px;
 }
 
 #head-infos{

@@ -42,11 +42,9 @@ h3.manage-patients-title {
 
 .table-division {
   border-bottom: 1px solid;
-
   padding: 1rem;
+  padding-left: 25px;
   display: flex;
-  align-content: center;
-  align-items: center;
   width: 25%;
 }
 
