@@ -45,7 +45,7 @@ function printPatient(patient){
     <p>${patient.location.zipcode} ${patient.location.city}</p>
     <br>
     <h3>Medical record</h3>
-    <p>Therapy : ${patient.MyTherapy}</p>
+    <p>Therapy : ${patient.myTherapy}</p>
     <p>Goal(s): ${patient.myGoals}</p>
     </div>
     `
