@@ -48,7 +48,7 @@ router.post("/patient/signin", async (req, res, next) => {
     const onePatient = { ...req.body }; 
 
     if(!onePatient.email || !onePatient.password){
-      res.render('auth/patient-signin', { errorMessage : 'You have to fill the two elements to log in bitch!'});
+      res.render('auth/patient-signin', { errorMessage : 'You have to fill the two elements to log in!'});
       return;
     };
 
@@ -146,7 +146,7 @@ router.post("/doctor/signin", async (req, res, next) => {
     const oneDoctor = {...req.body}
 
     if(!oneDoctor.email || !oneDoctor.password){
-      res.render('auth/doctor-signin', {errorMessage : 'You have to fill the two elements to log in bitch!'});
+      res.render('auth/doctor-signin', {errorMessage : 'You have to fill the two elements to log in!'});
       return;
     };
 
