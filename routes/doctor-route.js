@@ -6,7 +6,6 @@ const PatientModel = require('./../models/patient.model');
 const DoctorModel = require('./../models/doctor.model');
 const TextModel = require('./../models/text.model');
 const LoopModel = require('./../models/loop.model');
-const uploader = require("./../configs/cloudinaryconfig");
 
 /* LOG IN FIRST */
 router.get('/', (req, res, next) => {
@@ -34,15 +33,9 @@ router.get('/edit-profile/:id', (req, res, next) => {
   .catch(next);
 });
 
-router.post('/edit-profile/:id', uploader.single("photo"), (req, res, next) => {
+router.post('/edit-profile/:id', (req, res, next) => {
   console.log("req.body: ", req.body);
   const { name, lastname, email, phoneNumber, mySpecialty } = req.body;
-  let photo;
-  if (!req.file) photo = undefined;
-  else {
-      photo = req.file.path
-  };
-
   DoctorModel.findByIdAndUpdate(req.params.id, {
     name,
     lastname,
@@ -53,8 +46,7 @@ router.post('/edit-profile/:id', uploader.single("photo"), (req, res, next) => {
       zipcode: req.body.zipcode,
       city: req.body.city
     },
-    mySpecialty,
-    photo
+    mySpecialty
   }, {new: true})
   .then(dbRes => {
     console.log("Profile successfully edited! ", dbRes);

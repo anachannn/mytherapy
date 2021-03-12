@@ -9,7 +9,7 @@
 <div class="form-container">
 
 <h2 class="title-page-doctor">Your profile</h2>
-<form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form" enctype="multipart/form-data">
+<form method="post" action="/doctor/edit-profile/{{doctorInfo._id}}" class="form">
 
     <img src="{{doctorInfo.photo}}" alt="Profile picture">
 
@@ -40,10 +40,6 @@
 
     <label for="myspecialty">Your specialty</label>
     <input type="text" id="myspecialty" name="myspecialty" value="{{doctorInfo.mySpecialty}}" >
-
-    <label for="photo">Profile picture</label>
-    <input id="doctor-img" type="file" class="input" name="photo" value="{{doctorInfo.photo}}">
-  
 
     <button class="btn-doctor">Save changes</button>
 
