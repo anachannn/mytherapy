@@ -57,7 +57,13 @@ router.post('/edit-profile/:id', uploader.single("photo"), (req, res, next) => {
   })
   .catch(err => console.log(err));
 
-  const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals, photo } = req.body;
+  const { name, lastname, email, phoneNumber, myTherapist, myTherapy, myGoals } = req.body;
+  let photo;
+  if (!req.file) photo = undefined;
+  else {
+      photo = req.file.path
+  };
+  
   PatientModel.findByIdAndUpdate(req.params.id, {
     name,
     lastname,
