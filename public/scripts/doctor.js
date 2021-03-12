@@ -4,6 +4,7 @@ const patientsAPI = new APIHandler('http://localhost:3000/doctor/api');  // FOR 
 let containerInfo = document.getElementById("doctor-main");
 const body = document.querySelector("#body");
 let containerTab = document.querySelector(".doctor-manage-table")
+
     
 
 document.querySelectorAll('.select-one').forEach(selected => {
@@ -56,17 +57,13 @@ function printPatient(patient){
 
 function printDocuments(documentList){
   
-  
+    
     documentList.forEach(text => {
-        
+     
         body.innerHTML += `<tbody id="body">
         <tr class="table-row">
         <td class="table-division">
         <div>${text.docType}</div>
-        </td>
-        
-        <td class="table-division">
-        <div>${text.date}</div>
         </td>
         
         <td class="table-division">
