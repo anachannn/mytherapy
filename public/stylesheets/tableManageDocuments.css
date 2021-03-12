@@ -82,3 +82,8 @@ h3.manage-patients-title {
   width: 200px;
   text-align: center;
 }
+
+.doctor-division{
+  display: flex;
+  justify-content: center;
+}
