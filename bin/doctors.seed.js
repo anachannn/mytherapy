@@ -4,8 +4,8 @@ const DoctorModel = require("./../models/doctor.model");
 
 const doctors = [
   {
-    name: "Dr. Marie",
-    lastname: "Kehl",
+    name: "Dr. Jarl",
+    lastname: "Cung",
     email: "marie.kehl@psymail.com",
     password: "$2a$10$kYZ30yDIxWyb.OGJISo37.WC6spizuGJXraWL1eIhZdAhA0H8foR.",
     phoneNumber: "123456789",
@@ -14,7 +14,8 @@ const doctors = [
       zipcode: "90210",
       city: "Beverly Hills"
     },
-    mySpecialty: "CDT"
+    mySpecialty: "CDT",
+    photo: "https://res.cloudinary.com/dcbzfldni/image/upload/v1615543512/o1okju1rs3kkhehelctx.jpg"
   },
   {
     name: "Dr. Sigmund",
@@ -27,7 +28,8 @@ const doctors = [
       zipcode: "90210",
       city: "Beverly Hills"
     },
-    mySpecialty: "CDT"
+    mySpecialty: "CDT",
+    photo: "https://res.cloudinary.com/dcbzfldni/image/upload/v1615579162/qs49i0jgrpivfisof0f2.png"
   }
 ];
 
