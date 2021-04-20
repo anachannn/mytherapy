@@ -20,8 +20,7 @@ const patientSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
-        unique: true,
+        required: true
     },
     phoneNumber: String,
     location: {
