@@ -15,7 +15,7 @@ const patients = [
       city: "Vancouver"
     },
     photo: "https://res.cloudinary.com/dcbzfldni/image/upload/v1615549011/oto1l9kz0znja8xwmozn.png",
-    myTherapist: "",
+    myTherapist: "607ead27fdf430000af84bdc",
     myTherapy: "Cognitive-behavioral therapy (CBT)",
     myGoals: "I want to overcome Impostor Syndrome",
   },
@@ -31,7 +31,7 @@ const patients = [
       city: "Montréal"
     },
     photo: "https://res.cloudinary.com/dcbzfldni/image/upload/v1615543701/jdpbkmg7rkyftmxpjp3x.jpg",
-    myTherapist: "",
+    myTherapist: "607ead27fdf430000af84bdc",
     myTherapy: "Cognitive-behavioral therapy (CBT)",
     myGoals: "I want to reduce my stress",
   },
@@ -47,7 +47,7 @@ const patients = [
       city: "Olouise"
     },
     photo: "https://res.cloudinary.com/dcbzfldni/image/upload/v1615543701/jdpbkmg7rkyftmxpjp3x.jpg",
-    myTherapist: "",
+    myTherapist: "607ead27fdf430000af84bdb",
     myTherapy: "Cognitive-behavioral therapy (CBT)",
     myGoals: "I want to work on my confidence skills",
   }
