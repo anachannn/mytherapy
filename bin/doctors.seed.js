@@ -6,7 +6,7 @@ const doctors = [
   {
     name: "Dr. Jarl",
     lastname: "Cung",
-    email: "marie.kehl@psymail.com",
+    email: "cung@psymail.com",
     password: "$2a$10$kYZ30yDIxWyb.OGJISo37.WC6spizuGJXraWL1eIhZdAhA0H8foR.",
     phoneNumber: "123456789",
     location: {
@@ -18,9 +18,9 @@ const doctors = [
     photo: "https://res.cloudinary.com/dcbzfldni/image/upload/v1615543512/o1okju1rs3kkhehelctx.jpg"
   },
   {
-    name: "Dr. Sigmund",
-    lastname: "Freud",
-    email: "sigmund@psymail.com",
+    name: "Dr. Figmund",
+    lastname: "Sreud",
+    email: "figmund@psymail.com",
     password: "$2a$10$kYZ30yDIxWyb.OGJISo37.WC6spizuGJXraWL1eIhZdAhA0H8foR.",
     phoneNumber: "123456789",
     location: {
